@@ -11,6 +11,10 @@ const GlobalStyles = createGlobalStyle`
       height: 100vh;
       overflow: hidden;
       font-family: 'Roboto', sans-serif;
+
+      @media (max-width: 768px) {
+        display: flex;
+      }
   }
 `
 

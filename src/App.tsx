@@ -7,22 +7,22 @@ import Students from './pages/Students'
 import GlobalStyles from './theme/GlobalStyles'
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false)
+	const [isOpen, setIsOpen] = useState(false)
 
-  const toggle = () => {
-    setIsOpen(prevIsOpen => !prevIsOpen)
-  }
+	const toggle = () => {
+		setIsOpen(prevIsOpen => !prevIsOpen)
+	}
 
 	return (
 		<>
 			<GlobalStyles />
-			<Navbar toggle={toggle}/>
+			<Navbar toggle={toggle} />
 			<div className="container" style={{ display: 'flex', minHeight: 'calc(100vh - 82px)' }}>
-				<Sidebar isOpen={isOpen}/>
-					<Routes>
-						<Route path="/" element={<Start />} />
-						<Route path="/students" element={<Students />} />
-					</Routes>
+				<Sidebar isOpen={isOpen} />
+				<Routes>
+					<Route path="/" element={<Start />} />
+					<Route path="/students" element={<Students />} />
+				</Routes>
 			</div>
 		</>
 	)

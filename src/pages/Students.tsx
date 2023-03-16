@@ -1,6 +1,10 @@
+import { StyledStudents } from "../styles/Students.styles"
+
 const Students = () => {
     return (
-      <div>Students</div>
+      <StyledStudents>
+        <h1>Lista uczniów</h1>
+      </StyledStudents>
     )
   }
   
