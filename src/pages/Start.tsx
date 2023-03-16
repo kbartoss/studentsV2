@@ -1,8 +1,8 @@
 import { StartText, StyledStart } from "../styles/Start.styles"
 
-const Start = () => {
+const Start = ({ isOpen }: any) => {
   return (
-    <StyledStart>
+    <StyledStart isOpen={isOpen}>
         <img src="/src/images/start-img.png" alt="Animated image of person sitting next to desk and using laptop" />
         <StartText>Witamy w panelu administratora.</StartText>
     </StyledStart>

@@ -20,8 +20,8 @@ function App() {
 			<div className="container" style={{ display: 'flex', minHeight: 'calc(100vh - 82px)' }}>
 				<Sidebar isOpen={isOpen} />
 				<Routes>
-					<Route path="/" element={<Start />} />
-					<Route path="/students" element={<Students />} />
+					<Route path="/" element={<Start isOpen={isOpen} />} />
+					<Route path="/students" element={<Students isOpen={isOpen} />} />
 				</Routes>
 			</div>
 		</>

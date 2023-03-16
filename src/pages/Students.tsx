@@ -1,9 +1,9 @@
 import { StyledStudents } from "../styles/Students.styles"
 
-const Students = () => {
+const Students = ({ isOpen }: any) => {
     return (
-      <StyledStudents>
-        <h1>Lista uczniów</h1>
+      <StyledStudents isOpen={isOpen}>
+        <h1>Lista uczniów Lista uczniów</h1>
       </StyledStudents>
     )
   }

@@ -13,6 +13,7 @@ const StyledSidebar = styled.div<{ isOpen: boolean }>`
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+		transition: max-width 0.3s;
 		border-bottom: 0.5px solid #cecece;
 		cursor: pointer;
 		text-decoration: none;
@@ -36,6 +37,34 @@ const StyledSidebar = styled.div<{ isOpen: boolean }>`
 	.active {
 		background-color: #6d7d9d;
 		color: #fff;
+	}
+
+	@media (max-width: 768px) {
+		position: absolute;
+		height: 100%;
+		width: 70%;
+		right: 0;
+		background: #3d5584;
+		box-shadow: none;
+		transition: max-width 0.3s;
+		max-width: ${({ isOpen }) => (isOpen ? '70%' : '0px')};
+		overflow: hidden;
+		z-index: 10;
+
+		a {
+			border: none;
+			padding: 22px 40px;
+		}
+
+		span {
+			color: #fff;
+		}
+
+		svg {
+			path {
+				stroke: white;
+			}
+		}
 	}
 `
 
