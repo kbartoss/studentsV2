@@ -1,12 +1,17 @@
-import { StyledStudents } from "../styles/Students.styles"
+import { useState } from 'react'
+import { StyledStudents } from '../styles/Students.styles'
+import StudentsHeader from '../components/StudentsHeader'
+import StudentsTable from '../components/StudentsTable'
 
 const Students = ({ isOpen }: any) => {
-    return (
-      <StyledStudents isOpen={isOpen}>
-        <h1>Lista uczniów Lista uczniów</h1>
-      </StyledStudents>
-    )
-  }
-  
-  export default Students
-  
+	const [searchQuery, setSearchQuery] = useState<string>('')
+	
+	return (
+		<StyledStudents isOpen={isOpen}>
+			<StudentsHeader setSearchQuery={setSearchQuery}/>
+			<StudentsTable searchQuery={searchQuery}/>
+		</StyledStudents>
+	)
+}
+
+export default Students
