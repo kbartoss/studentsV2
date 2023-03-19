@@ -10,6 +10,8 @@ const StyledGrade = styled.div`
 	background: #2fcd15;
 	border-radius: 50%;
 	font-size: 18px;
+	border: 1px solid #9B9B9B;
+	font-weight: 700;
 `
 
 export { StyledGrade }
