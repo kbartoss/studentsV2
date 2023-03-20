@@ -80,7 +80,7 @@ const StudentsTable = ({ searchQuery }: any) => {
 				Header: '',
 				accessor: 'actions',
 				Cell: ({ row }) => {
-					return <IconBox/>
+					return <IconBox />
 				},
 			},
 		],
@@ -88,13 +88,19 @@ const StudentsTable = ({ searchQuery }: any) => {
 	)
 
 	const search = () => {
-		return studentsData.filter(
-			student =>
-				student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				student.surname.toLowerCase().includes(searchQuery.toLowerCase())
-		)
+		return studentsData.filter(student => {
+			const fullName = `${student.name} ${student.surname}`
+			const searchQueryArr = searchQuery.toLowerCase().split(' ')
+			const containsSearchQuery = searchQueryArr.every(query => {
+				return (
+					student.name.toLowerCase().includes(query) ||
+					student.surname.toLowerCase().includes(query) ||
+					fullName.toLowerCase().includes(query)
+				)
+			})
+			return containsSearchQuery
+		})
 	}
-
 	const data = useMemo(
 		() =>
 			search().map(student => ({

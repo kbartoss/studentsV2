@@ -9,7 +9,7 @@ const StyledGrade = styled.div`
 	color: #fff;
 	background: #2fcd15;
 	border-radius: 50%;
-	font-size: 18px;
+	font-size: 24px;
 	border: 1px solid #9B9B9B;
 	font-weight: 700;
 `

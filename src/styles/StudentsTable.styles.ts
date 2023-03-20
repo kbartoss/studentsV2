@@ -30,9 +30,14 @@ const StyledTable = styled.table`
 			td {
 				padding: 10px 24px;
 			}
-
+			
 			td:first-child {
 				border-radius: 12px 0 0 12px;
+			}
+
+			td:nth-child(2) {
+				background-color: red;
+				min-width: 200px;
 			}
 
 			td:last-child {

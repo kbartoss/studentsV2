@@ -35,6 +35,10 @@ const StyledHeader = styled.div`
 			font-size: 18px;
 		}
 
+		input[type='search']::-webkit-search-cancel-button {
+			margin-right: 16px;
+		}
+
 		button {
 			margin-left: 14px;
 			width: 52px;
