@@ -1,14 +1,14 @@
-import searchIcon from '../images/search-icon.png'
+import SearchIcon from '../icons/SearchIcon'
 import { StyledHeader } from '../styles/StudentsHeader.styles'
 
-const StudentsHeader = ({ setSearchQuery }: any) => {
+const StudentsHeader = ({ setSearchQuery, addStudent }: any) => {
 	return (
 		<StyledHeader>
 			<h1>Lista uczniów</h1>
 			<div className="search-box">
 				<input type="search" placeholder="Szukaj uczniów..." onChange={e => setSearchQuery(e.target.value)} />
-				<img src={searchIcon} alt="Search"/>
-				<button>+</button>
+				<SearchIcon />
+				<button onClick={addStudent}>+</button>
 			</div>
 		</StyledHeader>
 	)
