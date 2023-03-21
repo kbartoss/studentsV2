@@ -47,12 +47,12 @@ const StyledDeleteModal = styled.div`
 
 		&__cancel {
 			background-color: ${({ theme }) => theme.color.secondaryColor};
-			border: 2px solid ${({ theme }) => theme.colors.primaryColor};
+			border: 2px solid ${({ theme }) => theme.color.primaryColor};
 			border-radius: 12px;
 
 			&:hover {
 				background: #ecf3ff;
-				border: 2px solid ${({ theme }) => theme.colors.primaryColor};
+				border: 2px solid ${({ theme }) => theme.color.primaryColor};
 			}
 		}
 

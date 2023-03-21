@@ -4,14 +4,13 @@ import StudentsHeader from '../components/StudentsHeader'
 import StudentsTable from '../components/StudentsTable'
 import Overlay from '../components/Overlay'
 import DeleteModal from '../components/DeleteModal'
-import AddStudent from './AddStudent'
-import EditStudent from './EditStudent'
+import AddEditStudent from './AddEditStudent'
 
 const Students = ({ isOpen }: any) => {
 	const [searchQuery, setSearchQuery] = useState<string>('')
 	const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
-	const [showAddPage, setShowAddPage] = useState<boolean>(false)
-	const [showEditPage, setShowEditPage] = useState<boolean>(false)
+	const [showAddEditPage, setShowAddEditPage] = useState<boolean>(false)
+	const [isEdit, setIsEdit] = useState<boolean>(false)
 
 	const deleteStudent = () => {
 		setShowDeleteModal(true)
@@ -26,29 +25,27 @@ const Students = ({ isOpen }: any) => {
 	}
 
 	const addStudent = () => {
-		setShowAddPage(true)
+		setShowAddEditPage(true)
 	}
 
 	const editStudent = () => {
-		setShowEditPage(true)
+		setIsEdit(true)
+		setShowAddEditPage(true)
 	}
 
 	const previousPage = () => {
-		setShowAddPage(false)
-		setShowEditPage(false)
-	  }
-	
+		setShowAddEditPage(false)
+		setIsEdit(false)
+	}
 
 	return (
 		<>
-			{showAddPage ? (
-				<AddStudent previousPage={previousPage}/>
-			) : showEditPage ? (
-				<EditStudent previousPage={previousPage}/>
+			{showAddEditPage ? (
+				<AddEditStudent previousPage={previousPage} isEdit={isEdit} />
 			) : (
 				<StyledStudents isOpen={isOpen}>
 					<StudentsHeader setSearchQuery={setSearchQuery} addStudent={addStudent} />
-					<StudentsTable searchQuery={searchQuery} deleteStudent={deleteStudent} />
+					<StudentsTable searchQuery={searchQuery} deleteStudent={deleteStudent} editStudent={editStudent} />
 					{showDeleteModal && (
 						<>
 							<Overlay closeModal={closeModal}></Overlay>

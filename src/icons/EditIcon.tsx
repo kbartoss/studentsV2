@@ -1,8 +1,8 @@
 import { StyledIconBoxIcon } from "../styles/IconBoxIcons.styles"
 
-function EditIcon() {
+function EditIcon({editStudent}: any) {
 	return (
-		<StyledIconBoxIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 28 28">
+		<StyledIconBoxIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 28 28" onClick={editStudent}>
 			<path
 				stroke="#444"
 				strokeLinecap="round"

@@ -2,11 +2,11 @@ import EditIcon from '../icons/EditIcon'
 import TrashIcon from '../icons/TrashIcon'
 import { StyledIconBox } from '../styles/IconBox.styles'
 
-const IconBox = ({}: any) => {
+const IconBox = ({editStudent, deleteStudent}: any) => {
 	return (
 		<StyledIconBox>
-			<TrashIcon />
-			<EditIcon />
+			<TrashIcon deleteStudent={deleteStudent}/>
+			<EditIcon editStudent={editStudent}/>
 		</StyledIconBox>
 	)
 }

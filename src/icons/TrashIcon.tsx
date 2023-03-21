@@ -1,8 +1,8 @@
 import { StyledIconBoxIcon } from "../styles/IconBoxIcons.styles"
 
-function TrashIcon({}: any) {
+function TrashIcon({deleteStudent}: any) {
 	return (
-		<StyledIconBoxIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 28 28" className="trash">
+		<StyledIconBoxIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 28 28" className="trash" onClick={deleteStudent}>
 			<path
 				stroke="#444"
 				strokeLinecap="round"

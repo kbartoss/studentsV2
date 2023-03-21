@@ -17,7 +17,7 @@ type StudentProps = {
 	grade: number
 }
 
-const StudentsTable = ({ searchQuery }: any) => {
+const StudentsTable = ({ searchQuery, editStudent, deleteStudent }: any) => {
 	const [studentsData, setStudentsData] = useState<StudentProps[]>([])
 
 	useEffect(() => {
@@ -80,7 +80,7 @@ const StudentsTable = ({ searchQuery }: any) => {
 				Header: '',
 				accessor: 'actions',
 				Cell: ({ row }) => {
-					return <IconBox />
+					return <IconBox editStudent={editStudent} deleteStudent={deleteStudent}/>
 				},
 			},
 		],
