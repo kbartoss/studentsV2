@@ -6,9 +6,8 @@ const StyledAvatar = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: #b8cda4;
 	border-radius: 50%;
-	color: #000;
+	color: ${({ theme }) => theme.color.blackColor};
 	font-weight: 500;
 	font-size: 18px;
 `

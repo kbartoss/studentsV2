@@ -6,7 +6,7 @@ const Nav = styled.div`
 	align-items: center;
 	width: 100%;
 	height: 82px;
-	background-color: #3d5584;
+	background-color: ${({ theme }) => theme.color.primaryColor};
 	overflow: hidden;
 
 	@media (max-width: 768px) {

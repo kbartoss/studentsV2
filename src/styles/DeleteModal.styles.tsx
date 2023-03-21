@@ -9,26 +9,26 @@ const StyledDeleteModal = styled.div`
 	width: 548px;
 	height: 290px;
 	border-radius: 24px;
-	background-color: #f9fbff;
+	background-color: ${({ theme }) => theme.color.secondaryColor};
 	z-index: 11;
 
 	.question {
 		font-size: 24px;
 		font-weight: 500;
-		color: #000;
+		color: ${({ theme }) => theme.color.blackColor};
 		margin-bottom: 12px;
 	}
 
 	.info {
 		font-size: 18px;
-		color: #000;
+		color: ${({ theme }) => theme.color.blackColor};
 	}
 
 	.student {
 		margin-top: 25px;
 		font-weight: 500;
 		font-size: 24px;
-		color: #000;
+		color: ${({ theme }) => theme.color.blackColor};
 	}
 
 	.btns {
@@ -46,18 +46,18 @@ const StyledDeleteModal = styled.div`
 		}
 
 		&__cancel {
-			background: #f9fbff;
-			border: 2px solid #3d5584;
+			background-color: ${({ theme }) => theme.color.secondaryColor};
+			border: 2px solid ${({ theme }) => theme.colors.primaryColor};
 			border-radius: 12px;
 
 			&:hover {
 				background: #ecf3ff;
-				border: 2px solid #3d5584;
+				border: 2px solid ${({ theme }) => theme.colors.primaryColor};
 			}
 		}
 
 		&__delete {
-			color: #fff;
+			color: ${({ theme }) => theme.color.whiteColor};
 			background-color: #ea3636;
 			border: none;
 

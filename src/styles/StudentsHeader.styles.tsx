@@ -19,8 +19,7 @@ const StyledHeader = styled.div`
 			width: 271px;
 			height: 52px;
 			margin-left: auto;
-			border: 1px solid #000000;
-			// filter: drop-shadow(0px 2px 40px rgba(166, 172, 237, 0.5));
+			border: 1px solid ${({ theme }) => theme.color.blackColor};
 			border-radius: 12px;
 			font-size: 18px;
 		}
@@ -33,8 +32,8 @@ const StyledHeader = styled.div`
 			margin-left: 14px;
 			width: 52px;
 			height: 52px;
-			background: #3d5584;
-			color: #fff;
+			background-color: ${({ theme }) => theme.color.primaryColor};
+			color: ${({ theme }) => theme.color.whiteColor};
 			font-size: 32px;
 			border: none;
 			border-radius: 12px;

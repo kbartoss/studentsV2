@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 
 const StyledSidebar = styled.div<{ isOpen: boolean }>`
-	background-color: #f9fbff;
+	background-color: ${({ theme }) => theme.color.secondaryColor};
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 	transition: flex 0.3s;
-	/* flex: 0 0 310px; */
 	flex: ${({ isOpen }) => (isOpen ? '0 0 310px' : '0 0 0px')};
 
 	a {
@@ -19,7 +18,7 @@ const StyledSidebar = styled.div<{ isOpen: boolean }>`
 		text-decoration: none;
 		font-weight: 500;
 		font-size: 1.125rem;
-		color: #000;
+		color: ${({ theme }) => theme.color.blackColor};
 
 		svg {
 			width: 24px;
@@ -36,7 +35,7 @@ const StyledSidebar = styled.div<{ isOpen: boolean }>`
 
 	.active {
 		background-color: #6d7d9d;
-		color: #fff;
+		color: ${({ theme }) => theme.color.whiteColor};
 	}
 
 	@media (max-width: 768px) {
@@ -44,7 +43,7 @@ const StyledSidebar = styled.div<{ isOpen: boolean }>`
 		height: 100%;
 		width: 70%;
 		right: 0;
-		background: #3d5584;
+		background: ${({ theme }) => theme.color.primaryColor};
 		box-shadow: none;
 		transition: max-width 0.3s;
 		max-width: ${({ isOpen }) => (isOpen ? '70%' : '0px')};
@@ -57,12 +56,12 @@ const StyledSidebar = styled.div<{ isOpen: boolean }>`
 		}
 
 		span {
-			color: #fff;
+			color: ${({ theme }) => theme.color.whiteColor};
 		}
 
 		svg {
 			path {
-				stroke: white;
+				stroke: ${({ theme }) => theme.color.whiteColor};
 			}
 		}
 	}
