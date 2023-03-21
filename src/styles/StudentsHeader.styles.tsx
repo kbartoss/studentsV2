@@ -40,6 +40,23 @@ const StyledHeader = styled.div`
 			cursor: pointer;
 		}
 	}
+
+	@media (max-width: 768px) {
+		/* display: none; */
+		flex-direction: column;
+		align-items: flex-start;
+		margin-left: 0;
+
+		h1 {
+			font-size: 24px;
+			margin-bottom: 24px;
+		}
+
+		.search-box
+		{
+			margin-left: 0;
+		}
+	}
 `
 
 export { StyledHeader }

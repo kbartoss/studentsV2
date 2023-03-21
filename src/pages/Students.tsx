@@ -5,6 +5,7 @@ import StudentsTable from '../components/StudentsTable'
 import Overlay from '../components/Overlay'
 import DeleteModal from '../components/DeleteModal'
 import AddEditStudent from './AddEditStudent'
+import Pagination from '../components/Pagination'
 
 const Students = ({ isOpen }: any) => {
 	const [searchQuery, setSearchQuery] = useState<string>('')
@@ -46,6 +47,7 @@ const Students = ({ isOpen }: any) => {
 				<StyledStudents isOpen={isOpen}>
 					<StudentsHeader setSearchQuery={setSearchQuery} addStudent={addStudent} />
 					<StudentsTable searchQuery={searchQuery} deleteStudent={deleteStudent} editStudent={editStudent} />
+					<Pagination />
 					{showDeleteModal && (
 						<>
 							<Overlay closeModal={closeModal}></Overlay>

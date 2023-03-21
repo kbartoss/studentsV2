@@ -52,6 +52,10 @@ const StyledTable = styled.table`
 			background: #e5e5e5;
 		}
 	}
+
+	@media (max-width: 768px) {
+		
+	}
 `
 
 export { StyledTable }
