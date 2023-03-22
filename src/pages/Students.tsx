@@ -8,10 +8,10 @@ import AddEditStudent from './AddEditStudent'
 import Pagination from '../components/Pagination'
 
 const Students = ({ isOpen }: any) => {
-	const [searchQuery, setSearchQuery] = useState<string>('')
-	const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
-	const [showAddEditPage, setShowAddEditPage] = useState<boolean>(false)
-	const [isEdit, setIsEdit] = useState<boolean>(false)
+	const [searchQuery, setSearchQuery] = useState('')
+	const [showDeleteModal, setShowDeleteModal] = useState(false)
+	const [showAddEditPage, setShowAddEditPage] = useState(false)
+	const [isEdit, setIsEdit] = useState(false)
 
 	const deleteStudent = () => {
 		setShowDeleteModal(true)

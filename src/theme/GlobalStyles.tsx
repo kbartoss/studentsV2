@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
       height: 100vh;
       overflow: hidden;
       font-family: 'Roboto', sans-serif;
+      overflow-x: hidden;
 
       @media (max-width: 768px) {
         display: flex;

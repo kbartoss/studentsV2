@@ -54,7 +54,6 @@ const StyledTable = styled.table`
 	}
 
 	@media (max-width: 768px) {
-		
 	}
 `
 

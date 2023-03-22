@@ -14,15 +14,31 @@ const StyledAddEditStudent = styled.div`
 		margin-bottom: 12px;
 	}
 
-	.input {
+	input {
 		padding: 14px 18px;
 		width: 80%;
 		height: 60px;
 		font-size: 18px;
+		font-weight: 400;
 		margin-bottom: 32px;
+		color: ${({ theme }) => theme.color.blackColor};
 		background: ${({ theme }) => theme.color.whiteColor};
 		border: 1px solid #818181;
 		border-radius: 12px;
+	}
+
+	input[type='number']::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		display: none;
+	}
+
+	.error {
+		display: block;
+		text-align: left;
+		font-size: 16px;
+		margin-top: -24px;
+		margin-bottom: 20px;
+		color: #ea3636;
 	}
 
 	.btns {
@@ -42,9 +58,8 @@ const StyledAddEditStudent = styled.div`
 			cursor: pointer;
 			transition: background-color 0.3s;
 
-			&:hover
-			{
-				background: #5270AB;
+			&:hover {
+				background: #5270ab;
 			}
 		}
 
@@ -55,9 +70,8 @@ const StyledAddEditStudent = styled.div`
 			border-radius: 12px;
 			margin-right: 24px;
 
-			&:hover
-			{
-				background: #E5EBF7;
+			&:hover {
+				background: #e5ebf7;
 			}
 		}
 	}
