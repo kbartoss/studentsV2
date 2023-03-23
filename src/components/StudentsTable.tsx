@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
-import { supabase } from '../api/supabaseClient'
+import { useMemo } from 'react'
 import { format } from 'date-fns'
 import { useTable } from 'react-table'
 import { StyledTable } from '../styles/StudentsTable.styles'
@@ -7,30 +6,7 @@ import Avatar from './Avatar'
 import Grade from './Grade'
 import IconBox from './IconBox'
 
-type StudentProps = {
-	id: number
-	name: string
-	surname: string
-	mail: string
-	phoneNumber: string
-	created_at: string
-	grade: number
-}
-
-const StudentsTable = ({ searchQuery, editStudent, deleteStudent }: any) => {
-	const [studentsData, setStudentsData] = useState<StudentProps[]>([])
-
-	useEffect(() => {
-		const fetchStudents = async () => {
-			try {
-				const { data: studentsData } = await supabase.from(`listStudents`).select(`*`)
-				setStudentsData(studentsData as StudentProps[])
-			} catch (error) {
-				console.log('fetching error', error)
-			}
-		}
-		fetchStudents()
-	}, [])
+const StudentsTable = ({ studentsData, searchQuery, editStudent, deleteStudent }: any) => {
 
 	const columns = useMemo(
 		() => [
@@ -80,7 +56,7 @@ const StudentsTable = ({ searchQuery, editStudent, deleteStudent }: any) => {
 				Header: '',
 				accessor: 'actions',
 				Cell: ({ row }) => {
-					return <IconBox editStudent={editStudent} deleteStudent={deleteStudent}/>
+					return <IconBox editStudent={editStudent} deleteStudent={deleteStudent} rowData={row.original} />
 				},
 			},
 		],
@@ -116,7 +92,7 @@ const StudentsTable = ({ searchQuery, editStudent, deleteStudent }: any) => {
 		[studentsData, searchQuery]
 	)
 
-	const tableInstance = useTable({ columns, data, disableSortBy: true })
+	const tableInstance = useTable({ columns, data })
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance
 
 	return (

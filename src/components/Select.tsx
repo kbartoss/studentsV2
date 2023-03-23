@@ -23,7 +23,9 @@ function Select() {
 	return (
 		<StyledSelect onClick={toggleSelect} ref={ref}>
 			<DropdownIcon />
-			<div className="selected-option">{selectedOption}</div>
+			<div className="selected-option">
+				{selectedOption}
+			</div>
 			{selectIsOpen && (
 				<div className="options">
 					{options.map(option => (
