@@ -96,7 +96,13 @@ const Students = ({ isOpen }: any) => {
 	return (
 		<>
 			{showAddEditPage ? (
-				<AddEditStudent previousPage={previousPage} isEdit={isEdit} confirmEditing={confirmEditing} selectedStudent={selectedStudent} setStudentsData={setStudentsData}/>
+				<AddEditStudent
+					previousPage={previousPage}
+					isEdit={isEdit}
+					confirmEditing={confirmEditing}
+					selectedStudent={selectedStudent}
+					setStudentsData={setStudentsData}
+				/>
 			) : (
 				<StyledStudents isOpen={isOpen}>
 					<StudentsHeader setSearchQuery={setSearchQuery} addStudent={addStudent} />

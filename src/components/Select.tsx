@@ -3,15 +3,16 @@ import DropdownIcon from '../icons/DropdownIcon'
 import { StyledSelect } from '../styles/Select.styles'
 import useClickOutside from '../hooks/useClickOutside'
 
-function Select() {
+function Select({ onOptionChange, initialOption }: any) {
 	const options = [1, 2, 3, 4, 5, 6]
 
 	const ref = useRef()
 	const [selectIsOpen, setSelectIsOpen] = useState(false)
-	const [selectedOption, setSelectedOption] = useState(options[0])
+	const [selectedOption, setSelectedOption] = useState(initialOption)
 
 	const handleOptionClick = (option: any) => {
 		setSelectedOption(option)
+		onOptionChange(option);
 	}
 
 	const toggleSelect = () => {

@@ -3,16 +3,16 @@ import Select from '../components/Select'
 import { StyledAddEditStudent } from '../styles/AddEditStudent.styles'
 import { validPhone, validMail, validName } from '../utils/regex'
 import { supabase } from '../api/supabaseClient'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-const AddStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData, confirmEditing }: any) => {
+const AddEditStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData, confirmEditing }: any) => {
 	const {
 		register,
 		handleSubmit,
 		watch,
 		formState: { errors },
 	} = useForm()
-	const onSubmit = (data: any) => console.log(data)
+	const onSubmit = (data: any) => ''
 
 	const [name, setName] = useState(selectedStudent.name)
 	const [surname, setSurname] = useState(selectedStudent.surname)
@@ -20,16 +20,23 @@ const AddStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData, co
 	const [mail, setMail] = useState(selectedStudent.mail)
 	const [grade, setGrade] = useState(selectedStudent.grade)
 
+	useEffect(() => {
+		setGrade(selectedStudent.grade)
+	}, [selectedStudent])
+
+	const handleOptionChange = (option: any) => {
+		setGrade(option)
+	  }
+
 	const handleConfirmEditing = async () => {
 		const { error } = await supabase
 			.from('listStudents')
-			.update({ name, surname, phoneNumber, mail, grade })
+			.update({ name, surname, phoneNumber, mail, grade: grade })
 			.eq('id', selectedStudent.id)
 
 		if (error) {
 			console.log('Error updating student:', error.message)
 		} else {
-			console.log('Student updated successfully:', selectedStudent.name)
 			const { data: updatedData } = await supabase.from('listStudents').select('*')
 			setStudentsData(updatedData)
 			confirmEditing()
@@ -88,8 +95,7 @@ const AddStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData, co
 				{errors.email && <p className="error">Nieprawidłowy format adresu e-mail</p>}
 
 				<p className="title">Wystaw ocenę</p>
-				<Select/>
-
+				<Select onOptionChange={handleOptionChange} initialOption={grade} />
 				<div className="btns">
 					<button onClick={previousPage} className="back">
 						Powrót
@@ -103,4 +109,4 @@ const AddStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData, co
 	)
 }
 
-export default AddStudent
+export default AddEditStudent

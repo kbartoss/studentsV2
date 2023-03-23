@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
+import AddEditStudent from './pages/AddEditStudent'
 import Start from './pages/Start'
 import Students from './pages/Students'
 import GlobalStyles from './theme/GlobalStyles'
@@ -22,6 +23,7 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Start isOpen={isOpen} />} />
 					<Route path="/students" element={<Students isOpen={isOpen} />} />
+					<Route path='/students/:studentId' element={<AddEditStudent />} />
 				</Routes>
 			</div>
 		</>

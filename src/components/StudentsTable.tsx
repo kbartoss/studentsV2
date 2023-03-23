@@ -7,7 +7,7 @@ import Grade from './Grade'
 import IconBox from './IconBox'
 
 const StudentsTable = ({ studentsData, searchQuery, editStudent, deleteStudent }: any) => {
-
+	
 	const columns = useMemo(
 		() => [
 			{
@@ -79,7 +79,7 @@ const StudentsTable = ({ studentsData, searchQuery, editStudent, deleteStudent }
 	}
 	const data = useMemo(
 		() =>
-			search().map(student => ({
+			search().map((student) => ({
 				id: student.id,
 				name: student.name,
 				surname: student.surname,
@@ -88,11 +88,11 @@ const StudentsTable = ({ studentsData, searchQuery, editStudent, deleteStudent }
 				created_at: student.created_at,
 				grade: student.grade,
 				actions: '',
-			})),
+			})).sort((a, b) => a.id - b.id),
 		[studentsData, searchQuery]
 	)
 
-	const tableInstance = useTable({ columns, data })
+	const tableInstance = useTable({ columns, data, })
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance
 
 	return (
