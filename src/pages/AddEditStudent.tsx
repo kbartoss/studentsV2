@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import Select from '../components/Select'
 import { StyledAddEditStudent } from '../styles/AddEditStudent.styles'
 import { validPhone, validMail, validName } from '../utils/regex'
@@ -11,8 +11,9 @@ const AddEditStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData
 		handleSubmit,
 		watch,
 		formState: { errors },
+		control,
 	} = useForm()
-	const onSubmit = (data: any) => ''
+	const onSubmit = (data: any) => console.log(data)
 
 	const [name, setName] = useState(selectedStudent.name)
 	const [surname, setSurname] = useState(selectedStudent.surname)
@@ -26,20 +27,39 @@ const AddEditStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData
 
 	const handleOptionChange = (option: any) => {
 		setGrade(option)
-	  }
+	}
 
 	const handleConfirmEditing = async () => {
-		const { error } = await supabase
-			.from('listStudents')
-			.update({ name, surname, phoneNumber, mail, grade: grade })
-			.eq('id', selectedStudent.id)
+		try {
+			const { error } = await supabase
+				.from('listStudents')
+				.update({ name, surname, phoneNumber, mail, grade: grade })
+				.eq('id', selectedStudent.id)
 
-		if (error) {
-			console.log('Error updating student:', error.message)
-		} else {
+			if (error) {
+				throw new Error(`Error updating student: ${error.message}`)
+			}
+
 			const { data: updatedData } = await supabase.from('listStudents').select('*')
 			setStudentsData(updatedData)
 			confirmEditing()
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
+	const handleAddStudent = async () => {
+		try {
+			const { error } = await supabase.from('listStudents').insert({ name, surname, phoneNumber, mail, grade })
+
+			if (error) {
+				throw new Error(`Error adding student: ${error.message}`)
+			}
+			const { data: updatedData } = await supabase.from('listStudents').select('*')
+			setStudentsData(updatedData)
+			previousPage()
+		} catch (error) {
+			console.error(error)
 		}
 	}
 
@@ -96,13 +116,21 @@ const AddEditStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData
 
 				<p className="title">Wystaw ocenę</p>
 				<Select onOptionChange={handleOptionChange} initialOption={grade} />
+				{/* {errors.grade && <p className="error">Podaj ocenę ucznia</p>} */}
+
 				<div className="btns">
 					<button onClick={previousPage} className="back">
 						Powrót
 					</button>
-					<button type="submit" className="confirm" onClick={handleConfirmEditing}>
-						{isEdit ? 'Zatwierdź' : 'Dodaj ucznia'}
-					</button>
+					{isEdit ? (
+						<button type="submit" className="confirm" onClick={handleConfirmEditing}>
+							Zatwierdź
+						</button>
+					) : (
+						<button type="submit" className="confirm" onClick={handleSubmit(handleAddStudent)}>
+							Dodaj ucznia
+						</button>
+					)}
 				</div>
 			</form>
 		</StyledAddEditStudent>

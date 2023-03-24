@@ -50,6 +50,7 @@ const Students = ({ isOpen }: any) => {
 			await supabase.from('listStudents').delete().eq('id', selectedStudent?.id)
 			const updatedData = studentsData.filter(student => student.id !== selectedStudent?.id)
 			setStudentsData(updatedData)
+			setSelectedStudent({})
 		} catch (error) {
 			console.error('error deleting student', error)
 		}
@@ -58,6 +59,7 @@ const Students = ({ isOpen }: any) => {
 
 	const cancelDelete = () => {
 		setShowDeleteModal(false)
+		setSelectedStudent({})
 	}
 
 	// ======================= DELETE ======================= //
@@ -80,6 +82,7 @@ const Students = ({ isOpen }: any) => {
 
 	const confirmEditing = () => {
 		setShowAddEditPage(false)
+		setSelectedStudent({})
 	}
 
 	// ======================= EDIT ======================= //
@@ -87,10 +90,12 @@ const Students = ({ isOpen }: any) => {
 	const previousPage = () => {
 		setShowAddEditPage(false)
 		setIsEdit(false)
+		setSelectedStudent({})
 	}
 
 	const closeModal = () => {
 		setShowDeleteModal(false)
+		setSelectedStudent({})
 	}
 
 	return (
