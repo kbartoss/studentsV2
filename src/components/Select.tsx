@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import DropdownIcon from '../icons/DropdownIcon'
 import { StyledSelect } from '../styles/Select.styles'
 import useClickOutside from '../hooks/useClickOutside'

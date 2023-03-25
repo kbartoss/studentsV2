@@ -25,18 +25,20 @@ const Students = ({ isOpen }: any) => {
 	const [showAddEditPage, setShowAddEditPage] = useState(false)
 	const [isEdit, setIsEdit] = useState(false)
 	const [selectedStudent, setSelectedStudent] = useState({})
+	const [allStudentsNumber, setAllStudentsNumber] = useState(0)
 
 	useEffect(() => {
 		const fetchStudents = async () => {
 			try {
-				const { data: studentsData } = await supabase.from(`listStudents`).select(`*`)
+				const { data: studentsData, count } = await supabase.from(`listStudents`).select('*', { count: 'exact' })
 				setStudentsData(studentsData as StudentProps[])
+				setAllStudentsNumber(count)
 			} catch (error) {
 				console.log('fetching error', error)
 			}
 		}
 		fetchStudents()
-	}, [])
+	}, [studentsData])
 
 	// ======================= DELETE ======================= //
 
@@ -83,6 +85,7 @@ const Students = ({ isOpen }: any) => {
 	const confirmEditing = () => {
 		setShowAddEditPage(false)
 		setSelectedStudent({})
+		setIsEdit(false)
 	}
 
 	// ======================= EDIT ======================= //
@@ -97,6 +100,12 @@ const Students = ({ isOpen }: any) => {
 		setShowDeleteModal(false)
 		setSelectedStudent({})
 	}
+
+	// ======================= NUMBER OF STUDENTS ======================= //
+
+	const studentsNumber = studentsData.length
+
+	// ======================= NUMBER OF STUDENTS ======================= //
 
 	return (
 		<>
@@ -117,7 +126,7 @@ const Students = ({ isOpen }: any) => {
 						deleteStudent={deleteStudent}
 						editStudent={editStudent}
 					/>
-					<Pagination />
+					<Pagination studentsNumber={studentsNumber} allStudentsNumber={allStudentsNumber} />
 					{showDeleteModal && (
 						<>
 							<Overlay closeModal={closeModal}></Overlay>

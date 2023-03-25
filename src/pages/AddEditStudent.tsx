@@ -9,11 +9,10 @@ const AddEditStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData
 	const {
 		register,
 		handleSubmit,
-		watch,
-		formState: { errors },
 		control,
+		formState: { errors },
 	} = useForm()
-	const onSubmit = (data: any) => console.log(data)
+	const onSubmit = (data: any) => ''
 
 	const [name, setName] = useState(selectedStudent.name)
 	const [surname, setSurname] = useState(selectedStudent.surname)
@@ -114,9 +113,16 @@ const AddEditStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData
 				/>
 				{errors.email && <p className="error">Nieprawidłowy format adresu e-mail</p>}
 
-				<p className="title">Wystaw ocenę</p>
-				<Select onOptionChange={handleOptionChange} initialOption={grade} />
-				{/* {errors.grade && <p className="error">Podaj ocenę ucznia</p>} */}
+				<Controller
+					name="grade"
+					control={control}
+					render={({ field }) => (
+						<>
+							<p className="title">Wybierz ocenę</p>
+							<Select onOptionChange={handleOptionChange} initialOption={isEdit ? selectedStudent.grade : '1'} />
+						</>
+					)}
+				/>
 
 				<div className="btns">
 					<button onClick={previousPage} className="back">
