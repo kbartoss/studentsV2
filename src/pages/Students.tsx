@@ -7,6 +7,9 @@ import DeleteModal from '../components/DeleteModal'
 import AddEditStudent from './AddEditStudent'
 import Pagination from '../components/Pagination'
 import { supabase } from '../api/supabaseClient'
+import { LoaderContainer } from '../styles/LoaderContainer.styles'
+import { MoonLoader } from 'react-spinners'
+import theme from '../theme/theme'
 
 type StudentProps = {
 	id: number
@@ -26,6 +29,7 @@ const Students = ({ isOpen }: any) => {
 	const [isEdit, setIsEdit] = useState(false)
 	const [selectedStudent, setSelectedStudent] = useState({})
 	const [allStudentsNumber, setAllStudentsNumber] = useState(0)
+	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
 		const fetchStudents = async () => {
@@ -33,12 +37,20 @@ const Students = ({ isOpen }: any) => {
 				const { data: studentsData, count } = await supabase.from(`listStudents`).select('*', { count: 'exact' })
 				setStudentsData(studentsData as StudentProps[])
 				setAllStudentsNumber(count)
+				setLoading(false)
 			} catch (error) {
 				console.log('fetching error', error)
 			}
 		}
-		fetchStudents()
+		const delay = 500
+		const timeoutId = setTimeout(() => {
+			fetchStudents()
+		}, delay)
+
+		return () => clearTimeout(timeoutId)
 	}, [studentsData])
+
+	const displayedStudents = studentsData.slice(0, 10)
 
 	// ======================= DELETE ======================= //
 
@@ -64,15 +76,11 @@ const Students = ({ isOpen }: any) => {
 		setSelectedStudent({})
 	}
 
-	// ======================= DELETE ======================= //
-
 	// ======================= ADD ======================= //
 
 	const addStudent = () => {
 		setShowAddEditPage(true)
 	}
-
-	// ======================= ADD ======================= //
 
 	// ======================= EDIT ======================= //
 
@@ -88,8 +96,6 @@ const Students = ({ isOpen }: any) => {
 		setIsEdit(false)
 	}
 
-	// ======================= EDIT ======================= //
-
 	const previousPage = () => {
 		setShowAddEditPage(false)
 		setIsEdit(false)
@@ -103,9 +109,7 @@ const Students = ({ isOpen }: any) => {
 
 	// ======================= NUMBER OF STUDENTS ======================= //
 
-	const studentsNumber = studentsData.length
-
-	// ======================= NUMBER OF STUDENTS ======================= //
+	const studentsNumber = displayedStudents.length
 
 	return (
 		<>
@@ -120,8 +124,17 @@ const Students = ({ isOpen }: any) => {
 			) : (
 				<StyledStudents isOpen={isOpen}>
 					<StudentsHeader setSearchQuery={setSearchQuery} addStudent={addStudent} />
+					<LoaderContainer>
+						<MoonLoader
+							color={theme.color.primaryColor}
+							loading={loading}
+							size={150}
+							aria-label="Loading Spinner"
+							data-testid="loader"
+						/>
+					</LoaderContainer>
 					<StudentsTable
-						studentsData={studentsData}
+						studentsData={displayedStudents}
 						searchQuery={searchQuery}
 						deleteStudent={deleteStudent}
 						editStudent={editStudent}

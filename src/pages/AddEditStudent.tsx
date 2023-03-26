@@ -49,7 +49,7 @@ const AddEditStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData
 
 	const handleAddStudent = async () => {
 		try {
-			const { error } = await supabase.from('listStudents').insert({ name, surname, phoneNumber, mail, grade })
+			const { error } = await supabase.from('listStudents').insert({ name, surname, phoneNumber, mail, grade: grade || 1 })
 
 			if (error) {
 				throw new Error(`Error adding student: ${error.message}`)
@@ -119,10 +119,11 @@ const AddEditStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData
 					render={({ field }) => (
 						<>
 							<p className="title">Wybierz ocenę</p>
-							<Select onOptionChange={handleOptionChange} initialOption={isEdit ? selectedStudent.grade : '1'} />
+							<Select onOptionChange={handleOptionChange} initialOption={isEdit ? selectedStudent.grade : ''} />
 						</>
 					)}
 				/>
+
 
 				<div className="btns">
 					<button onClick={previousPage} className="back">

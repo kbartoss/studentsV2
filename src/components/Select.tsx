@@ -8,7 +8,8 @@ const Select = ({ onOptionChange, initialOption }: any) => {
 
 	const ref = useRef()
 	const [selectIsOpen, setSelectIsOpen] = useState(false)
-	const [selectedOption, setSelectedOption] = useState(initialOption)
+	const [selectedOption, setSelectedOption] = useState(initialOption || options[0])
+	
 
 	const handleOptionClick = (option: any) => {
 		setSelectedOption(option)

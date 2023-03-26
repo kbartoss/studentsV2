@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 const StyledStudents = styled.div<{ isOpen: boolean }>`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	padding: 32px 48px;

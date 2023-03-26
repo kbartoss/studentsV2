@@ -2,7 +2,7 @@ import { useState } from 'react'
 import InputArrow from '../icons/InputArrow'
 import { StyledPagination } from '../styles/Pagination.styles'
 
-const Pagination = ({ studentsNumber, allStudentsNumber, itemsPerPage = 0.75 }: any) => {
+const Pagination = ({ studentsNumber, allStudentsNumber, itemsPerPage = 10}: any) => {
 	const totalPages = Math.ceil(allStudentsNumber / itemsPerPage)
 
 	const [currentPage, setCurrentPage] = useState(1)
