@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { StyledStudents } from '../styles/Students.styles'
 import StudentsHeader from '../components/StudentsHeader'
 import StudentsTable from '../components/StudentsTable'

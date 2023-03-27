@@ -1,4 +1,3 @@
-import styled from "styled-components"
 import { StyledInputArrow } from "../styles/Pagination.styles"
 
 function InputArrow() {

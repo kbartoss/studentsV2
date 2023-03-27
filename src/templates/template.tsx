@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
 const Container = styled.div`
-	background-color: #f5f5f5;
+	background-color: ${({ theme }) => theme.color.whiteColor};
 	border-radius: 4px;
 	padding: 16px;
 `
 
 const Text = styled.p`
-	color: #333;
+	color: ${({ theme }) => theme.color.blackColor};
 	font-size: 16px;
 `
 

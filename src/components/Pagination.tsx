@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import InputArrow from '../icons/InputArrow'
 import { StyledPagination } from '../styles/Pagination.styles'
 

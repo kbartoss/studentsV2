@@ -42,7 +42,6 @@ const StyledHeader = styled.div`
 	}
 
 	@media (max-width: 768px) {
-		/* display: none; */
 		flex-direction: column;
 		align-items: flex-start;
 		margin-left: 0;

@@ -13,7 +13,6 @@ const theme = {
 		blackColor: '#000',
 		whiteColor: '#fff',
 	},
-	// other colors
 }
 
 export default theme
