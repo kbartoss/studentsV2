@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 const StyledSelect = styled.div`
 	position: relative;
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 	padding: 14px 18px;
 	width: 80%;
 	height: 60px;
@@ -16,10 +16,9 @@ const StyledSelect = styled.div`
 	border-radius: 12px;
 	cursor: pointer;
 
-
 	.options {
-        margin-top: 2px;
-        overflow: hidden;
+		margin-top: 2px;
+		overflow: hidden;
 		background-color: white;
 		border: 1px solid #ccc;
 		border-radius: 12px;
@@ -28,17 +27,44 @@ const StyledSelect = styled.div`
 		top: 100%;
 		width: 100%;
 
-        .option
-        {
-            cursor: pointer;
-            padding: 4px 18px;
+		.option {
+			cursor: pointer;
+			padding: 4px 18px;
 
-            &:hover 
-            {
-                color: ${({ theme }) => theme.color.whiteColor};
-                background-color: ${({ theme }) => theme.color.primaryColor};
-            }
-        }
+			&:hover {
+				color: ${({ theme }) => theme.color.whiteColor};
+				background-color: ${({ theme }) => theme.color.primaryColor};
+			}
+		}
+	}
+
+	@media (max-width: 768px) {
+		width: 100%;
+		border-radius: ${({ selectIsOpen }) => (selectIsOpen ? '0 0 12px 12px' : '12px')};
+		background: ${({ selectIsOpen }) => (selectIsOpen ? '#E7EFFE' : '12px')};;
+		border: 1px solid #818181;
+
+		.options {
+			top: auto;
+			bottom: 100%;
+			height: 314px;
+			background: #f5f5f5;
+			border: 1px solid #818181;
+			border-radius: 12px 12px 0px 0px;
+
+			.option {
+				padding: 14px 18px;
+				background: #f5f5f5;
+				border: 1px solid #e0e0e0;
+				font-weight: 600;
+				font-size: 18px;
+
+				&:hover {
+					background-color: #e7e7e7;
+					color: ${({ theme }) => theme.color.blackColor};
+				}
+			}
+		}
 	}
 `
 

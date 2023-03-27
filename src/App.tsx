@@ -23,7 +23,7 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Start isOpen={isOpen} />} />
 					<Route path="/students" element={<Students isOpen={isOpen} />} />
-					<Route path='/students/:studentId' element={<AddEditStudent />} />
+					<Route path="/students/:studentId" element={<AddEditStudent />} />
 				</Routes>
 			</div>
 		</>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { StyledStudents } from '../styles/Students.styles'
 import StudentsHeader from '../components/StudentsHeader'
 import StudentsTable from '../components/StudentsTable'
@@ -11,18 +11,8 @@ import { LoaderContainer } from '../styles/LoaderContainer.styles'
 import { MoonLoader } from 'react-spinners'
 import theme from '../theme/theme'
 
-type StudentProps = {
-	id: number
-	name: string
-	surname: string
-	mail: string
-	phoneNumber: string
-	created_at: string
-	grade: number
-}
-
 const Students = ({ isOpen }: any) => {
-	const [studentsData, setStudentsData] = useState<StudentProps[]>([])
+	const [studentsData, setStudentsData] = useState([])
 	const [searchQuery, setSearchQuery] = useState('')
 	const [showDeleteModal, setShowDeleteModal] = useState(false)
 	const [showAddEditPage, setShowAddEditPage] = useState(false)
@@ -30,12 +20,17 @@ const Students = ({ isOpen }: any) => {
 	const [selectedStudent, setSelectedStudent] = useState({})
 	const [allStudentsNumber, setAllStudentsNumber] = useState(0)
 	const [loading, setLoading] = useState(true)
+	const [currentPage, setCurrentPage] = useState(1)
+	const itemsPerPage = 7
 
 	useEffect(() => {
 		const fetchStudents = async () => {
 			try {
-				const { data: studentsData, count } = await supabase.from(`listStudents`).select('*', { count: 'exact' })
-				setStudentsData(studentsData as StudentProps[])
+				const { data: studentsData, count } = await supabase
+					.from(`listStudents`)
+					.select('*', { count: 'exact' })
+					.order('created_at', { ascending: false })
+				setStudentsData(studentsData)
 				setAllStudentsNumber(count)
 				setLoading(false)
 			} catch (error) {
@@ -50,11 +45,14 @@ const Students = ({ isOpen }: any) => {
 		return () => clearTimeout(timeoutId)
 	}, [studentsData])
 
-	const displayedStudents = studentsData.slice(0, 10)
+	const totalStudents = studentsData.length
+	const startIndex = Math.max(totalStudents - currentPage * itemsPerPage, 0)
+	const endIndex = startIndex + itemsPerPage
+	const displayedStudents = studentsData.slice(startIndex, endIndex)
 
 	// ======================= DELETE ======================= //
 
-	const deleteStudent = async (student: StudentProps) => {
+	const deleteStudent = async student => {
 		setSelectedStudent(student)
 		setShowDeleteModal(true)
 	}
@@ -84,7 +82,7 @@ const Students = ({ isOpen }: any) => {
 
 	// ======================= EDIT ======================= //
 
-	const editStudent = async (student: StudentProps) => {
+	const editStudent = async student => {
 		setSelectedStudent(student)
 		setIsEdit(true)
 		setShowAddEditPage(true)
@@ -133,13 +131,21 @@ const Students = ({ isOpen }: any) => {
 							data-testid="loader"
 						/>
 					</LoaderContainer>
-					<StudentsTable
-						studentsData={displayedStudents}
-						searchQuery={searchQuery}
-						deleteStudent={deleteStudent}
-						editStudent={editStudent}
-					/>
-					<Pagination studentsNumber={studentsNumber} allStudentsNumber={allStudentsNumber} />
+					<div style={{ width: '100%' }}>
+						<StudentsTable
+							studentsData={displayedStudents}
+							searchQuery={searchQuery}
+							deleteStudent={deleteStudent}
+							editStudent={editStudent}
+						/>
+						<Pagination
+							studentsNumber={studentsNumber}
+							allStudentsNumber={allStudentsNumber}
+							currentPage={currentPage}
+							setCurrentPage={setCurrentPage}
+							itemsPerPage={itemsPerPage}
+						/>
+					</div>
 					{showDeleteModal && (
 						<>
 							<Overlay closeModal={closeModal}></Overlay>

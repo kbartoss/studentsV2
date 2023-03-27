@@ -1,8 +1,14 @@
 import { StyledDropdownIcon } from '../styles/DropdownIcon.style'
 
-function DropdownIcon() {
+function DropdownIcon({ selectIsOpen }: any) {
 	return (
-		<StyledDropdownIcon xmlns="http://www.w3.org/2000/svg" width="20" height="12" fill="none" viewBox="0 0 20 12">
+		<StyledDropdownIcon
+			selectIsOpen={selectIsOpen}
+			xmlns="http://www.w3.org/2000/svg"
+			width="20"
+			height="12"
+			fill="none"
+			viewBox="0 0 20 12">
 			<path
 				stroke="#000"
 				strokeLinecap="round"

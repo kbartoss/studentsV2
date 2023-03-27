@@ -19,6 +19,7 @@ const StyledSidebar = styled.div<{ isOpen: boolean }>`
 		font-weight: 500;
 		font-size: 1.125rem;
 		color: ${({ theme }) => theme.color.blackColor};
+		
 
 		svg {
 			width: 24px;

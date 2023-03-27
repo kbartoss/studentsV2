@@ -52,8 +52,7 @@ const StyledHeader = styled.div`
 			margin-bottom: 24px;
 		}
 
-		.search-box
-		{
+		.search-box {
 			margin-left: 0;
 		}
 	}

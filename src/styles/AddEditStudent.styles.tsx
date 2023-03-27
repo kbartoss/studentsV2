@@ -75,6 +75,41 @@ const StyledAddEditStudent = styled.div`
 			}
 		}
 	}
+
+	@media (max-width: 768px) {
+		padding: 24px 25px;
+		width: 100vw;
+
+		h1 {
+			font-size: 24px;
+			font-weight: 500;
+			margin-bottom: 24px;
+		}
+
+		input {
+			width: 100%;
+			margin-bottom: 24px;
+		}
+
+		.error {
+			font-size: 12px;
+			margin-top: -18px;
+			margin-bottom: 10px;
+		}
+
+		.btns {
+			flex-direction: column;
+			width: 100%;
+
+			button {
+				width: 100%;
+			}
+
+			.back {
+				margin-bottom: 16px;
+			}
+		}
+	}
 `
 
 export { StyledAddEditStudent }

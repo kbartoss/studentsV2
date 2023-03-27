@@ -23,8 +23,8 @@ const Select = ({ onOptionChange, initialOption }: any) => {
 	useClickOutside(ref, () => setSelectIsOpen(false))
 
 	return (
-		<StyledSelect onClick={toggleSelect} ref={ref}>
-			<DropdownIcon />
+		<StyledSelect onClick={toggleSelect} ref={ref} selectIsOpen={selectIsOpen}>
+			<DropdownIcon selectIsOpen={selectIsOpen}/>
 			<div className="selected-option">{selectedOption}</div>
 			{selectIsOpen && (
 				<div className="options">

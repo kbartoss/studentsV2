@@ -5,6 +5,11 @@ const StyledDropdownIcon = styled.svg`
 	right: 14px;
 	margin-top: 10px;
 	margin-bottom: 10px;
+
+	@media (max-width: 768px) {
+		transform: ${({ selectIsOpen }) => (selectIsOpen ? 'rotate(180deg)' : 'rotate(0)')};
+		transition: transform 0.2s;
+	}
 `
 
 export { StyledDropdownIcon }

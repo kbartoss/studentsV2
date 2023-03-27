@@ -8,6 +8,10 @@ const StyledOverlay = styled.div`
 	height: 100%;
 	background: rgba(82, 82, 82, 0.25);
 	z-index: 10;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 `
 
 export { StyledOverlay }

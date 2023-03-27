@@ -9,9 +9,9 @@ const GlobalStyles = createGlobalStyle`
 
   body {
       height: 100vh;
+      width: 100%;
       overflow: hidden;
       font-family: 'Roboto', sans-serif;
-      overflow-x: hidden;
 
       @media (max-width: 768px) {
         display: flex;

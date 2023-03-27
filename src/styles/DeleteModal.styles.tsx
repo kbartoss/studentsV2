@@ -4,8 +4,8 @@ const StyledDeleteModal = styled.div`
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
 	padding: 24px 32px;
+	transform: translate(-50%, -50%);
 	width: 548px;
 	height: 290px;
 	border-radius: 24px;
@@ -63,6 +63,31 @@ const StyledDeleteModal = styled.div`
 
 			&:hover {
 				background: #f56767;
+			}
+		}
+	}
+
+	@media (max-width: 768px) {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border-radius: 0;
+		padding: 68px 24px;
+
+		.question {
+			margin-bottom: 24px;
+		}
+
+		.student {
+			margin-top: 58px;
+		}
+
+		.btns {
+			flex-direction: column;
+			justify-content: flex-end;
+
+			&__cancel {
+				margin-bottom: 16px;
 			}
 		}
 	}
