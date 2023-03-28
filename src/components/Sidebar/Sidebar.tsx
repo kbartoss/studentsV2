@@ -1,25 +1,31 @@
-import { Link, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { StyledSidebar } from './Sidebar.styles'
 import StudentsIcon from '../../icons/StudentsIcon'
 import StartIcon from '../../icons/StartIcon'
 
-const Sidebar = ({ isOpen, toggle }: any) => {
-	const location = useLocation()
+type SidebarProps = {
+	isOpen: boolean
+}
 
-	const isActive = (path: string) => {
-		return location.pathname === path
-	}
-
+const Sidebar = ({ isOpen }: SidebarProps) => {
 	return (
 		<StyledSidebar isOpen={isOpen}>
-			<Link to="/" className={`${isActive('/') ? 'active' : ''}`}>
-				<StartIcon stroke={isActive('/') ? 'white' : 'black'} />
-				<span>Start</span>
-			</Link>
-			<Link to="/students" className={`${isActive('/students') ? 'active' : ''}`}>
-				<StudentsIcon stroke={isActive('/students') ? 'white' : 'black'} />
-				<span>Uczniowie</span>
-			</Link>
+			<NavLink exact to="/">
+				{({ isActive }) => (
+					<>
+						<StartIcon stroke={isActive ? 'white' : 'black'} />
+						<span>Start</span>
+					</>
+				)}
+			</NavLink>
+			<NavLink exact to="/students">
+				{({ isActive }) => (
+					<>
+						<StudentsIcon stroke={location.pathname === '/students' ? 'white' : 'black'} />
+						<span>Uczniowie</span>
+					</>
+				)}
+			</NavLink>
 		</StyledSidebar>
 	)
 }
