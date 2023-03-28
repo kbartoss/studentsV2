@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Sidebar from './components/Sidebar'
-import AddEditStudent from './pages/AddEditStudent'
-import Start from './pages/Start'
-import Students from './pages/Students'
+import Navbar from './components/Navbar/Navbar'
+import Sidebar from './components/Sidebar/Sidebar'
+import AddEditStudent from './pages/AddEditStudent/AddEditStudent'
+import Start from './pages/StartPage/Start'
+import Students from './pages/Students/Students'
 import GlobalStyles from './theme/GlobalStyles'
 
 function App() {

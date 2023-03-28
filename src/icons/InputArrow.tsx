@@ -1,4 +1,4 @@
-import { StyledInputArrow } from "../styles/Pagination.styles"
+import { StyledInputArrow } from '../components/Pagination/Pagination.styles'
 
 function InputArrow() {
 	return (

@@ -1,4 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
+import { MEDIA_QUERIES } from '../constants/mediaQueries'
+
+const { md } = MEDIA_QUERIES
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -13,7 +16,7 @@ const GlobalStyles = createGlobalStyle`
       overflow: hidden;
       font-family: 'Roboto', sans-serif;
 
-      @media (max-width: 768px) {
+      ${md} {
         display: flex;
       }
   }
