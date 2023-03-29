@@ -17,7 +17,7 @@ const Avatar = ({ initials }: AvatarProps) => {
 	}, [initials])
 
 	return (
-		<StyledAvatar className="avatar" style={{ backgroundColor: avatarColor }}>
+		<StyledAvatar style={{ backgroundColor: avatarColor }}>
 			{initials}
 		</StyledAvatar>
 	)

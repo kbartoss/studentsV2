@@ -1,10 +1,12 @@
+import { forwardRef } from 'react'
 import { useRef, useState } from 'react'
 import DropdownIcon from '../../icons/DropdownIcon/DropdownIcon'
-import { StyledSelect } from './Select.styles'
+import { Option, Options, StyledSelect } from './Select.styles'
 import useClickOutside from '../../hooks/useClickOutside'
+import { mergeRefs } from 'react-merge-refs'
 
-const Select = ({ onOptionChange, initialOption, options }: any) => {
-	const ref = useRef()
+const Select = forwardRef(({ onOptionChange, initialOption, options, field }: any, ref) => {
+	const selectRef = useRef()
 	const [selectIsOpen, setSelectIsOpen] = useState(false)
 	const [selectedOption, setSelectedOption] = useState(initialOption)
 
@@ -17,25 +19,22 @@ const Select = ({ onOptionChange, initialOption, options }: any) => {
 		setSelectIsOpen(prevIsSelectOpen => !prevIsSelectOpen)
 	}
 
-	useClickOutside(ref, () => setSelectIsOpen(false))
+	useClickOutside(selectRef, () => setSelectIsOpen(false))
 
 	return (
-		<StyledSelect onClick={toggleSelect} ref={ref} selectIsOpen={selectIsOpen}>
+		<StyledSelect onClick={toggleSelect} ref={mergeRefs([selectRef, ref])} {...field} selectIsOpen={selectIsOpen}>
 			<DropdownIcon selectIsOpen={selectIsOpen} />
-			<div className="selected-option">{selectedOption}</div>
+			<div>{selectedOption}</div>
 			{selectIsOpen && (
-				<div className="options">
+				<Options>
 					{options.map(option => (
-						<div
-							key={option}
-							className={`option ${option === selectedOption ? 'selected' : ''}`}
-							onClick={() => handleOptionClick(option)}>
+						<Option key={option} onClick={() => handleOptionClick(option)}>
 							{option}
-						</div>
+						</Option>
 					))}
-				</div>
+				</Options>
 			)}
 		</StyledSelect>
 	)
-}
+})
 export default Select

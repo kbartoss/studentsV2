@@ -3,7 +3,15 @@ import Select from '../../components/Select/Select'
 import { validPhone, validMail, validName } from '../../constants/regex'
 import { supabase } from '../../api/supabaseClient'
 import { useEffect, useState } from 'react'
-import { StyledAddEditStudent } from './AddEditStudent.styles'
+import {
+	AddEditPageBtns,
+	BackBtn,
+	ConfirmBtn,
+	ErrorText,
+	InputTitle,
+	StyledAddEditStudent,
+} from './AddEditStudent.styles'
+import Input from '../../components/Input/Input'
 
 const AddEditStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData, confirmEditing }: any) => {
 	const {
@@ -11,36 +19,25 @@ const AddEditStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData
 		handleSubmit,
 		control,
 		formState: { errors },
-	} = useForm()
-	const onSubmit = (data: any) => ''
+	} = useForm({ mode: 'onChange' })
+	const onSubmit = (data: any) => console.log(data)
 
-	const [name, setName] = useState(selectedStudent.name)
-	const [surname, setSurname] = useState(selectedStudent.surname)
-	const [phoneNumber, setPhoneNumber] = useState(selectedStudent.phoneNumber)
-	const [mail, setMail] = useState(selectedStudent.mail)
 	const [grade, setGrade] = useState(selectedStudent.grade)
-
-	const options = [1, 2, 3, 4, 5, 6]
-
-	useEffect(() => {
-		setGrade(selectedStudent.grade)
-	}, [selectedStudent])
 
 	const handleOptionChange = (option: any) => {
 		setGrade(option)
 	}
 
-	const handleConfirmEditing = async () => {
+	const handleConfirmEditing = async (data: any) => {
 		try {
 			const { error } = await supabase
 				.from('listStudents')
-				.update({ name, surname, phoneNumber, mail, grade: grade })
+				.update({ ...data, grade: grade || 1 })
 				.eq('id', selectedStudent.id)
 
 			if (error) {
 				throw new Error(`Error updating student: ${error.message}`)
 			}
-
 			const { data: updatedData } = await supabase.from('listStudents').select('*')
 			setStudentsData(updatedData)
 			confirmEditing()
@@ -49,12 +46,9 @@ const AddEditStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData
 		}
 	}
 
-	const handleAddStudent = async () => {
+	const handleAddStudent = async (data: any) => {
 		try {
-			const { error } = await supabase
-				.from('listStudents')
-				.insert({ name, surname, phoneNumber, mail, grade: grade || 1 })
-
+			const { error } = await supabase.from('listStudents').insert({ ...data, grade: grade || 1 })
 			if (error) {
 				throw new Error(`Error adding student: ${error.message}`)
 			}
@@ -69,87 +63,69 @@ const AddEditStudent = ({ previousPage, isEdit, selectedStudent, setStudentsData
 	return (
 		<StyledAddEditStudent>
 			<h1>{isEdit ? 'Edytuj' : 'Dodaj nowego'} ucznia</h1>
+
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<p className="title">Imię</p>
-				<input
-					defaultValue={selectedStudent.name}
+				<Input
+					title="Imię"
 					placeholder="Podaj imię ucznia"
-					{...register('firstName', {
-						required: true,
-						minLength: 3,
-						maxLength: 30,
-						pattern: validName,
-						onChange: e => setName(e.target.value),
-					})}
+					defaultValue={selectedStudent.name}
+					{...register('name', { required: true, minLength: 3, maxLength: 30, pattern: validName })}
 				/>
-				{errors.firstName && <p className="error">Imię powinno mieć od 3 do 30 znaków</p>}
+				{errors.name && <ErrorText>Imię powinno mieć od 3 do 30 znaków</ErrorText>}
 
-				<p className="title">Nazwisko</p>
-				<input
-					defaultValue={selectedStudent.surname}
+				<Input
+					title="Nazwisko"
 					placeholder="Podaj nazwisko ucznia"
-					{...register('lastName', {
-						required: true,
-						minLength: 3,
-						maxLength: 30,
-						pattern: validName,
-						onChange: e => setSurname(e.target.value),
-					})}
+					defaultValue={selectedStudent.surname}
+					{...register('surname', { required: 'true', minLength: 3, maxLength: 30, pattern: validName })}
 				/>
-				{errors.lastName && <p className="error">Nazwisko powinno mieć od 3 do 30 znaków</p>}
+				{errors.surname && <ErrorText>Nazwisko powinno mieć od 3 do 30 znaków</ErrorText>}
 
-				<p className="title">Numer telefonu</p>
-				<input
-					defaultValue={selectedStudent.phoneNumber}
-					placeholder="Podaj numer telefonu ucznia"
+				<Input
+					title="Numer telefonu"
 					type="number"
-					{...register('phoneNumber', {
-						required: true,
-						maxLength: 9,
-						minLength: 1,
-						pattern: validPhone,
-						onChange: e => setPhoneNumber(e.target.value),
-					})}
+					placeholder="Podaj numer telefonu ucznia"
+					defaultValue={selectedStudent.phoneNumber}
+					{...register('phoneNumber', { required: true, minLength: 1, maxLength: 9, pattern: validPhone })}
 				/>
-				{errors.phoneNumber && <p className="error">Numer telefonu powinien mieć od 1 do 9 cyfr</p>}
+				{errors.phoneNumber && <ErrorText>Numer telefonu powinien mieć od 1 do 9 cyfr</ErrorText>}
 
-				<p className="title">Adres e-mail</p>
-				<input
-					defaultValue={selectedStudent.mail}
+				<Input
+					title="Adres e-mail"
 					placeholder="Podaj e-mail ucznia"
-					{...register('email', { required: true, pattern: validMail, onChange: e => setMail(e.target.value) })}
+					defaultValue={selectedStudent.mail}
+					{...register('mail', { required: true, pattern: validMail })}
 				/>
-				{errors.email && <p className="error">Nieprawidłowy format adresu e-mail</p>}
+				{errors.mail && <ErrorText>Nieprawidłowy format adresu e-mail</ErrorText>}
 
 				<Controller
 					name="grade"
 					control={control}
 					render={({ field }) => (
 						<>
-							<p className="title">Wybierz ocenę</p>
+							<InputTitle>Wybierz ocenę</InputTitle>
 							<Select
+								{...field}
 								onOptionChange={handleOptionChange}
 								initialOption={isEdit ? selectedStudent.grade : 1}
-								options={options}
+								options={[1, 2, 3, 4, 5, 6]}
 							/>
 						</>
 					)}
 				/>
 
-				<div className="btns">
-					<button onClick={previousPage} className="back">
-						Powrót
-					</button>
+				<AddEditPageBtns>
+					<BackBtn onClick={previousPage}>Powrót</BackBtn>
 					{isEdit ? (
-						<button type="submit" className="confirm" onClick={handleSubmit(handleConfirmEditing)}>
+						<ConfirmBtn type="submit" onClick={handleSubmit(handleConfirmEditing)}>
 							Zatwierdź
-						</button>
+						</ConfirmBtn>
 					) : (
-						<button type="submit" className="confirm" onClick={handleSubmit(handleAddStudent)}>
+						<ConfirmBtn type="submit" onClick={handleSubmit(handleAddStudent)}>
 							Dodaj ucznia
-						</button>
+						</ConfirmBtn>
 					)}
-				</div>
+				</AddEditPageBtns>
 			</form>
 		</StyledAddEditStudent>
 	)

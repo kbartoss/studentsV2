@@ -1,4 +1,4 @@
-import { StyledPagination } from './Pagination.styles'
+import { Dropdown, PaginationContainer, SelectContainer, SideButton, StyledPagination } from './Pagination.styles'
 import Select from '../Select/Select'
 
 const Pagination = ({ studentsNumber, allStudentsNumber, itemsPerPage, currentPage, setCurrentPage }: any) => {
@@ -36,19 +36,20 @@ const Pagination = ({ studentsNumber, allStudentsNumber, itemsPerPage, currentPa
 		<>
 			{allStudentsNumber > 0 && (
 				<StyledPagination>
-					<div className="dropdown">
+					<Dropdown>
 						<p>Pokaż:</p>
-						<div className="select-container">
+						<SelectContainer>
 							<Select options={options} initialOption={10} onOptionChange={handleOptionChange} />
-						</div>
+						</SelectContainer>
 						<p>
 							{studentsNumber} z {allStudentsNumber} uczniów
 						</p>
-					</div>
-					<div className="pagination">
-						<button className="side" onClick={() => handlePageClick(currentPage - 1)} disabled={currentPage === 1}>
+					</Dropdown>
+
+					<PaginationContainer>
+						<SideButton onClick={() => handlePageClick(currentPage - 1)} disabled={currentPage === 1}>
 							Poprzednia
-						</button>
+						</SideButton>
 						{getPageNumbers().map((pageNumber, index) => (
 							<button
 								key={index}
@@ -57,13 +58,10 @@ const Pagination = ({ studentsNumber, allStudentsNumber, itemsPerPage, currentPa
 								{pageNumber}
 							</button>
 						))}
-						<button
-							className="side"
-							onClick={() => handlePageClick(currentPage + 1)}
-							disabled={currentPage === totalPages}>
+						<SideButton onClick={() => handlePageClick(currentPage + 1)} disabled={currentPage === totalPages}>
 							Następna
-						</button>
-					</div>
+						</SideButton>
+					</PaginationContainer>
 				</StyledPagination>
 			)}
 		</>

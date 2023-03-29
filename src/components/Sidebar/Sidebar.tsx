@@ -10,7 +10,7 @@ type SidebarProps = {
 const Sidebar = ({ isOpen }: SidebarProps) => {
 	return (
 		<StyledSidebar isOpen={isOpen}>
-			<NavLink exact to="/">
+			<NavLink to="/">
 				{({ isActive }) => (
 					<>
 						<StartIcon stroke={isActive ? 'white' : 'black'} />
@@ -18,10 +18,10 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
 					</>
 				)}
 			</NavLink>
-			<NavLink exact to="/students">
+			<NavLink to="/students">
 				{({ isActive }) => (
 					<>
-						<StudentsIcon stroke={location.pathname === '/students' ? 'white' : 'black'} />
+						<StudentsIcon stroke={isActive ? 'white' : 'black'} />
 						<span>Uczniowie</span>
 					</>
 				)}

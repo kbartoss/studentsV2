@@ -1,4 +1,12 @@
-import { StyledDeleteModal } from './DeleteModal.styles'
+import {
+	CancelBtn,
+	DeleteBtn,
+	DeleteModalBtns,
+	DeleteModalInfo,
+	DeleteModalQuestion,
+	DeleteModalStudentInfo,
+	StyledDeleteModal,
+} from './DeleteModal.styles'
 
 type DeleteModalProps = {
 	cancelDelete: () => void
@@ -12,19 +20,15 @@ type DeleteModalProps = {
 const DeleteModal = ({ cancelDelete, confirmDelete, selectedStudent }: DeleteModalProps) => {
 	return (
 		<StyledDeleteModal>
-			<p className="question">Na pewno chcesz usunąć tego ucznia z listy?</p>
-			<p className="info">Ta operacja bezpowrotnie skasuje danego ucznia z bazy danych.</p>
-			<p className="student">
+			<DeleteModalQuestion>Na pewno chcesz usunąć tego ucznia z listy?</DeleteModalQuestion>
+			<DeleteModalInfo>Ta operacja bezpowrotnie skasuje danego ucznia z bazy danych.</DeleteModalInfo>
+			<DeleteModalStudentInfo>
 				{selectedStudent.name} {selectedStudent.surname}
-			</p>
-			<div className="btns">
-				<button className="btns__cancel" onClick={cancelDelete}>
-					Anuluj
-				</button>
-				<button className="btns__delete" onClick={confirmDelete}>
-					Usuń
-				</button>
-			</div>
+			</DeleteModalStudentInfo>
+			<DeleteModalBtns>
+				<CancelBtn onClick={cancelDelete}>Anuluj</CancelBtn>
+				<DeleteBtn onClick={confirmDelete}>Usuń</DeleteBtn>
+			</DeleteModalBtns>
 		</StyledDeleteModal>
 	)
 }
