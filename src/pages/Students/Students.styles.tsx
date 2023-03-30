@@ -10,7 +10,7 @@ const StyledStudents = styled.div<{ isOpen: boolean }>`
 	padding: 32px 48px;
 	flex: 1 1 auto;
 	width: 100vw;
-	overflow: auto;
+	overflow-x: auto;
 
 	${md} {
 		max-width: 100vw;

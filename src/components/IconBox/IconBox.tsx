@@ -7,10 +7,15 @@ const IconBox = ({ editStudent, deleteStudent, rowData }: any) => {
 		e.stopPropagation()
 		deleteStudent(rowData)
 	}
+
+	const handleEdit = (e: any) => {
+		e.stopPropagation()
+		editStudent(rowData)
+	}
 	return (
 		<StyledIconBox>
 			<TrashIcon handleDelete={handleDelete} />
-			<EditIcon editStudent={() => editStudent(rowData)} />
+			<EditIcon editStudent={handleEdit} />
 		</StyledIconBox>
 	)
 }

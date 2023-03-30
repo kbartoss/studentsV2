@@ -4,7 +4,6 @@ import { MEDIA_QUERIES } from '../../constants/mediaQueries'
 const { md } = MEDIA_QUERIES
 
 const StyledTable = styled.table`
-	margin-top: 38px;
 	width: 100%;
 	border-spacing: 0 12px;
 
@@ -20,9 +19,6 @@ const StyledTable = styled.table`
 	}
 
 	tbody {
-		overflow-y: scroll;
-		overflow-x: auto;
-
 		tr {
 			background: #fefeff;
 			border: 1px solid rgba(217, 217, 217, 0.7);
@@ -70,4 +66,10 @@ const StyledTable = styled.table`
 	}
 `
 
-export { StyledTable }
+const TableContainer = styled.div`
+	margin-top: 38px;
+	max-height: 30vw;
+	overflow-y: auto;
+`
+
+export { StyledTable, TableContainer }

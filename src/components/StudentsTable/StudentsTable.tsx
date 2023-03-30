@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import { format } from 'date-fns'
-import { useTable } from 'react-table'
-import { StyledTable } from './StudentsTable.styles'
+import { StyledTable, TableContainer } from './StudentsTable.styles'
 import Avatar from '../Avatar/Avatar'
 import Grade from '../Grade/Grade'
 import IconBox from '../IconBox/IconBox'
@@ -94,7 +93,11 @@ const StudentsTable = ({ studentsData, searchQuery, editStudent, deleteStudent }
 		[studentsData, searchQuery]
 	)
 
-	return <Table columns={columns} data={data} onRowClick={editStudent} />
+	return (
+		<TableContainer>
+			<Table columns={columns} data={data} onRowClick={editStudent} />
+		</TableContainer>
+	)
 }
 
 export default StudentsTable

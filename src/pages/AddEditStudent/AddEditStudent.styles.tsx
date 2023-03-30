@@ -6,8 +6,7 @@ const { md } = MEDIA_QUERIES
 const StyledAddEditStudent = styled.div`
 	padding: 32px 48px;
 	flex: 1 1 auto;
-	height: 100%; /* Add height: 100% to take up full screen height */
-	overflow: scroll; /* Add overflow: scroll to enable scrolling */
+	overflow: auto;
 
 	h1 {
 		margin-bottom: 32px;

@@ -4,25 +4,42 @@ import StudentsHeader from '../../components/StudentsHeader/StudentsHeader'
 import StudentsTable from '../../components/StudentsTable/StudentsTable'
 import Overlay from '../../components/Overlay/Overlay'
 import DeleteModal from '../../components/DeleteModal/DeleteModal'
-import AddEditStudent from '../AddEditStudent/AddEditStudent'
 import Pagination from '../../components/Pagination/Pagination'
 import { supabase } from '../../api/supabaseClient'
 import { LoaderContainer } from '../../styles/LoaderContainer.styles'
 import { MoonLoader } from 'react-spinners'
 import theme from '../../theme/theme'
+import {
+	setStudentsData,
+	setAllStudentsNumber,
+	setLoading,
+	setCurrentPage,
+	setShowDeleteModal,
+	setIsEdit,
+	setSelectedStudent,
+} from '../../redux/features/students/studentsSlice'
+import { connect } from 'react-redux/es/exports'
+import { useNavigate } from 'react-router-dom'
 
-const Students = ({ isOpen }: any) => {
-	const [studentsData, setStudentsData] = useState([])
+const Students = ({
+	studentsData,
+	allStudentsNumber,
+	loading,
+	currentPage,
+	showDeleteModal,
+	selectedStudent,
+	setStudentsData,
+	setAllStudentsNumber,
+	setLoading,
+	setCurrentPage,
+	setShowDeleteModal,
+	setIsEdit,
+	setSelectedStudent,
+	isOpen,
+}: any) => {
 	const [searchQuery, setSearchQuery] = useState('')
-	const [showDeleteModal, setShowDeleteModal] = useState(false)
-	const [showAddEditPage, setShowAddEditPage] = useState(false)
-	const [isEdit, setIsEdit] = useState(false)
-	const [selectedStudent, setSelectedStudent] = useState({})
-	const [allStudentsNumber, setAllStudentsNumber] = useState(0)
-	const [loading, setLoading] = useState(true)
-	const [currentPage, setCurrentPage] = useState(1)
-	const itemsPerPage = 7
-	// useState dropdown paginacja zmiana
+	const [itemsPerPage, setItemsPerPage] = useState(7)
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		const fetchStudents = async () => {
@@ -46,9 +63,7 @@ const Students = ({ isOpen }: any) => {
 	const endIndex = startIndex + itemsPerPage
 	const displayedStudents = studentsData.slice(startIndex, endIndex)
 
-	// ======================= DELETE ======================= //
-
-	const deleteStudent = async student => {
+	const deleteStudent = async (student: any) => {
 		setSelectedStudent(student)
 		setShowDeleteModal(true)
 	}
@@ -70,30 +85,14 @@ const Students = ({ isOpen }: any) => {
 		setSelectedStudent({})
 	}
 
-	// ======================= ADD ======================= //
-
 	const addStudent = () => {
-		setShowAddEditPage(true)
+		navigate('/students/add', { state: { setStudentsData } })
 	}
 
-	// ======================= EDIT ======================= //
-
-	const editStudent = async student => {
+	const editStudent = async (student: any) => {
 		setSelectedStudent(student)
 		setIsEdit(true)
-		setShowAddEditPage(true)
-	}
-
-	const confirmEditing = () => {
-		setShowAddEditPage(false)
-		setSelectedStudent({})
-		setIsEdit(false)
-	}
-
-	const previousPage = () => {
-		setShowAddEditPage(false)
-		setIsEdit(false)
-		setSelectedStudent({})
+		navigate(`/students/${student.id}`, { state: { isEdit: true, selectedStudent: student } })
 	}
 
 	const closeModal = () => {
@@ -101,61 +100,66 @@ const Students = ({ isOpen }: any) => {
 		setSelectedStudent({})
 	}
 
-	// ======================= NUMBER OF STUDENTS ======================= //
-
 	const studentsNumber = displayedStudents.length
 
 	return (
 		<>
-			{showAddEditPage ? (
-				<AddEditStudent
-					previousPage={previousPage}
-					isEdit={isEdit}
-					confirmEditing={confirmEditing}
-					selectedStudent={selectedStudent}
-					setStudentsData={setStudentsData}
-				/>
-			) : (
-				<StyledStudents isOpen={isOpen}>
-					<StudentsHeader setSearchQuery={setSearchQuery} addStudent={addStudent} />
-					<LoaderContainer>
-						<MoonLoader
-							color={theme.color.primaryColor}
-							loading={loading}
-							size={150}
-							aria-label="Loading Spinner"
-							data-testid="loader"
-						/>
-					</LoaderContainer>
-					<div style={{ width: '100%' }}>
-						<StudentsTable
-							studentsData={displayedStudents}
-							searchQuery={searchQuery}
-							deleteStudent={deleteStudent}
-							editStudent={editStudent}
-						/>
-						<Pagination
-							studentsNumber={studentsNumber}
-							allStudentsNumber={allStudentsNumber}
-							currentPage={currentPage}
-							setCurrentPage={setCurrentPage}
-							itemsPerPage={itemsPerPage}
-						/>
-					</div>
-					{showDeleteModal && (
-						<>
-							<Overlay closeModal={closeModal}></Overlay>
-							<DeleteModal
-								cancelDelete={cancelDelete}
-								confirmDelete={confirmDelete}
-								selectedStudent={selectedStudent}
-							/>
-						</>
-					)}
-				</StyledStudents>
-			)}
+			<StyledStudents isOpen={isOpen}>
+				<StudentsHeader setSearchQuery={setSearchQuery} addStudent={addStudent} />
+				<LoaderContainer>
+					<MoonLoader
+						color={theme.color.primaryColor}
+						loading={loading}
+						size={150}
+						aria-label="Loading Spinner"
+						data-testid="loader"
+					/>
+				</LoaderContainer>
+				<div style={{ width: '100%' }}>
+					<StudentsTable
+						studentsData={displayedStudents}
+						searchQuery={searchQuery}
+						deleteStudent={deleteStudent}
+						editStudent={editStudent}
+					/>
+					<Pagination
+						studentsNumber={studentsNumber}
+						allStudentsNumber={allStudentsNumber}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
+						itemsPerPage={itemsPerPage}
+						setItemsPerPage={setItemsPerPage}
+					/>
+				</div>
+				{showDeleteModal && (
+					<>
+						<Overlay closeModal={closeModal}></Overlay>
+						<DeleteModal cancelDelete={cancelDelete} confirmDelete={confirmDelete} selectedStudent={selectedStudent} />
+					</>
+				)}
+			</StyledStudents>
 		</>
 	)
 }
 
-export default Students
+const mapStateToProps = state => ({
+	studentsData: state.students.studentsData,
+	allStudentsNumber: state.students.allStudentsNumber,
+	loading: state.students.loading,
+	currentPage: state.students.currentPage,
+	showDeleteModal: state.students.showDeleteModal,
+	isEdit: state.students.isEdit,
+	selectedStudent: state.students.selectedStudent,
+})
+
+const mapDispatchToProps = {
+	setStudentsData,
+	setAllStudentsNumber,
+	setLoading,
+	setCurrentPage,
+	setShowDeleteModal,
+	setIsEdit,
+	setSelectedStudent,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Students)

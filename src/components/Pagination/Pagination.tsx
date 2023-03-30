@@ -1,10 +1,19 @@
 import { Dropdown, PaginationContainer, SelectContainer, SideButton, StyledPagination } from './Pagination.styles'
 import Select from '../Select/Select'
 
-const Pagination = ({ studentsNumber, allStudentsNumber, itemsPerPage, currentPage, setCurrentPage }: any) => {
+const Pagination = ({
+	studentsNumber,
+	allStudentsNumber,
+	itemsPerPage,
+	currentPage,
+	setCurrentPage,
+	setItemsPerPage,
+}: any) => {
 	const options = [10, 20, 30, 40]
 
-	const handleOptionChange = (option: any) => {}
+	const handleOptionChange = (option: any) => {
+		setItemsPerPage(option)
+	}
 
 	const totalPages = Math.ceil(allStudentsNumber / itemsPerPage)
 

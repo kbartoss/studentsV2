@@ -1,18 +1,17 @@
-import AddEditStudent from "../pages/AddEditStudent/AddEditStudent";
-import Start from "../pages/StartPage/Start";
-import Students from "../pages/Students/Students";
+import { Route, Routes } from 'react-router-dom'
+import AddEditStudent from '../pages/AddEditStudent/AddEditStudent'
+import Start from '../pages/StartPage/Start'
+import Students from '../pages/Students/Students'
 
-export const routes = [
-	{
-		path: '/',
-		element: <Start />,
-	},
-	{
-		path: '/students',
-		element: <Students />,
-	},
-	{
-		path: '/students/:studentId',
-		element: <AddEditStudent />,
-	},
-]
+function CustomRoutes({ isOpen }: any) {
+	return (
+		<Routes>
+			<Route path="/" element={<Start isOpen={isOpen} />} />
+			<Route path="/students" element={<Students isOpen={isOpen} />} />
+			<Route path="/students/add" element={<AddEditStudent />} />
+			<Route path="/students/:studentId/*" element={<AddEditStudent />} />
+		</Routes>
+	)
+}
+
+export default CustomRoutes
