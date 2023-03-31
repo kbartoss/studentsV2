@@ -38,7 +38,7 @@ const Students = ({
 	isOpen,
 }: any) => {
 	const [searchQuery, setSearchQuery] = useState('')
-	const [itemsPerPage, setItemsPerPage] = useState(7)
+	const [itemsPerPage, setItemsPerPage] = useState(10)
 	const navigate = useNavigate()
 
 	useEffect(() => {
