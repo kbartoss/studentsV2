@@ -1,10 +1,8 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from '../../context/ThemeContext'
 import { StyledAvatar } from './Avatar.styles'
+import { AvatarProps } from '../../theme/types'
 
-type AvatarProps = {
-	initials: string
-}
 
 const Avatar = ({ initials }: AvatarProps) => {
 	const { theme } = useContext(ThemeContext)

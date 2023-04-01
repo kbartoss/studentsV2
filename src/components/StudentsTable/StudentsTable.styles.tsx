@@ -70,6 +70,10 @@ const TableContainer = styled.div`
 	margin-top: 38px;
 	max-height: 30vw;
 	overflow-y: auto;
+
+	${md} {
+		max-height: 60vh;
+	}
 `
 
 export { StyledTable, TableContainer }

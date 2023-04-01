@@ -20,6 +20,7 @@ import {
 } from '../../redux/features/students/studentsSlice'
 import { connect } from 'react-redux/es/exports'
 import { useNavigate } from 'react-router-dom'
+import { StateProps, Student, StudentProps } from '../../theme/types'
 
 const Students = ({
 	studentsData,
@@ -36,7 +37,7 @@ const Students = ({
 	setIsEdit,
 	setSelectedStudent,
 	isOpen,
-}: any) => {
+}: StudentProps) => {
 	const [searchQuery, setSearchQuery] = useState('')
 	const [itemsPerPage, setItemsPerPage] = useState(10)
 	const navigate = useNavigate()
@@ -47,9 +48,9 @@ const Students = ({
 				const { data: studentsData, count } = await supabase
 					.from(`listStudents`)
 					.select('*', { count: 'exact' })
-					.order('created_at', { ascending: false })
-				setStudentsData(studentsData)
-				setAllStudentsNumber(count)
+					.order('created_at', { ascending: true })
+				setStudentsData(studentsData as Student[])
+				setAllStudentsNumber(count ?? 0)
 				setLoading(false)
 			} catch (error) {
 				console.log('fetching error', error)
@@ -58,12 +59,16 @@ const Students = ({
 		fetchStudents()
 	}, [])
 
-	const totalStudents = studentsData.length
-	const startIndex = Math.max(totalStudents - currentPage * itemsPerPage, 0)
-	const endIndex = startIndex + itemsPerPage
-	const displayedStudents = studentsData.slice(startIndex, endIndex)
+	useEffect(() => {
+		setCurrentPage(1)
+	}, [itemsPerPage])
 
-	const deleteStudent = async (student: any) => {
+	const totalStudents = studentsData.length
+	const startIndex = (currentPage - 1) * itemsPerPage
+	const endIndex = startIndex + itemsPerPage
+	const displayedStudents = studentsData.slice(startIndex, endIndex).reverse()
+
+	const deleteStudent = async (student: Student) => {
 		setSelectedStudent(student)
 		setShowDeleteModal(true)
 	}
@@ -73,7 +78,7 @@ const Students = ({
 			await supabase.from('listStudents').delete().eq('id', selectedStudent?.id)
 			const updatedData = studentsData.filter(student => student.id !== selectedStudent?.id)
 			setStudentsData(updatedData)
-			setSelectedStudent({})
+			setSelectedStudent(null)
 		} catch (error) {
 			console.error('error deleting student', error)
 		}
@@ -82,14 +87,14 @@ const Students = ({
 
 	const cancelDelete = () => {
 		setShowDeleteModal(false)
-		setSelectedStudent({})
+		setSelectedStudent(null)
 	}
 
 	const addStudent = () => {
 		navigate('/students/add', { state: { setStudentsData } })
 	}
 
-	const editStudent = async (student: any) => {
+	const editStudent = async (student: Student) => {
 		setSelectedStudent(student)
 		setIsEdit(true)
 		navigate(`/students/${student.id}`, { state: { isEdit: true, selectedStudent: student } })
@@ -97,7 +102,7 @@ const Students = ({
 
 	const closeModal = () => {
 		setShowDeleteModal(false)
-		setSelectedStudent({})
+		setSelectedStudent(null)
 	}
 
 	const studentsNumber = displayedStudents.length
@@ -115,22 +120,20 @@ const Students = ({
 						data-testid="loader"
 					/>
 				</LoaderContainer>
-				<div style={{ width: '100%' }}>
-					<StudentsTable
-						studentsData={displayedStudents}
-						searchQuery={searchQuery}
-						deleteStudent={deleteStudent}
-						editStudent={editStudent}
-					/>
-					<Pagination
-						studentsNumber={studentsNumber}
-						allStudentsNumber={allStudentsNumber}
-						currentPage={currentPage}
-						setCurrentPage={setCurrentPage}
-						itemsPerPage={itemsPerPage}
-						setItemsPerPage={setItemsPerPage}
-					/>
-				</div>
+				<StudentsTable
+					studentsData={displayedStudents}
+					searchQuery={searchQuery}
+					deleteStudent={deleteStudent}
+					editStudent={editStudent}
+				/>
+				<Pagination
+					studentsNumber={studentsNumber}
+					allStudentsNumber={allStudentsNumber}
+					currentPage={currentPage}
+					setCurrentPage={setCurrentPage}
+					itemsPerPage={itemsPerPage}
+					setItemsPerPage={setItemsPerPage}
+				/>
 				{showDeleteModal && (
 					<>
 						<Overlay closeModal={closeModal}></Overlay>
@@ -142,7 +145,7 @@ const Students = ({
 	)
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: StateProps) => ({
 	studentsData: state.students.studentsData,
 	allStudentsNumber: state.students.allStudentsNumber,
 	loading: state.students.loading,

@@ -1,10 +1,7 @@
 import { useContext } from 'react'
 import { ThemeContext } from '../../context/ThemeContext'
 import { StyledGrade } from './Grade.styles'
-
-type GradeProps = {
-	value: number
-}
+import { GradeProps } from '../../theme/types'
 
 const Grade = ({ value }: GradeProps) => {
 	const { theme } = useContext(ThemeContext)

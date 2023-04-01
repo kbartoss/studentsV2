@@ -6,7 +6,7 @@ import GlobalStyles from './theme/GlobalStyles'
 import CustomRoutes from './routes/routes'
 
 function App() {
-	const [isOpen, setIsOpen] = useState(false)
+	const [isOpen, setIsOpen] = useState<boolean>(false)
 
 	const toggle = () => {
 		setIsOpen(prevIsOpen => !prevIsOpen)
@@ -18,7 +18,7 @@ function App() {
 			<Navbar toggle={toggle} />
 			<MainPageContainer>
 				<Sidebar isOpen={isOpen} />
-				<CustomRoutes />
+				<CustomRoutes isOpen={isOpen} />
 			</MainPageContainer>
 		</>
 	)

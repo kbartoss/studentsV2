@@ -2,8 +2,9 @@ import { Route, Routes } from 'react-router-dom'
 import AddEditStudent from '../pages/AddEditStudent/AddEditStudent'
 import Start from '../pages/StartPage/Start'
 import Students from '../pages/Students/Students'
+import { IsOpenProps } from '../theme/types'
 
-function CustomRoutes({ isOpen }: any) {
+function CustomRoutes({ isOpen }: IsOpenProps) {
 	return (
 		<Routes>
 			<Route path="/" element={<Start isOpen={isOpen} />} />

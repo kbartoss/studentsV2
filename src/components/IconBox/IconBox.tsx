@@ -1,8 +1,9 @@
 import EditIcon from '../../icons/IconBoxIcons/EditIcon'
 import TrashIcon from '../../icons/IconBoxIcons/TrashIcon'
+import { IconBoxProps } from '../../theme/types'
 import { StyledIconBox } from './IconBox.styles'
 
-const IconBox = ({ editStudent, deleteStudent, rowData }: any) => {
+const IconBox = ({ editStudent, deleteStudent, rowData }: IconBoxProps) => {
 	const handleDelete = (e: any) => {
 		e.stopPropagation()
 		deleteStudent(rowData)

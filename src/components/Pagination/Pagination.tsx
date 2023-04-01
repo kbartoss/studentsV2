@@ -1,5 +1,6 @@
 import { Dropdown, PaginationContainer, SelectContainer, SideButton, StyledPagination } from './Pagination.styles'
 import Select from '../Select/Select'
+import { PaginationProps } from '../../theme/types'
 
 const Pagination = ({
 	studentsNumber,
@@ -8,8 +9,8 @@ const Pagination = ({
 	currentPage,
 	setCurrentPage,
 	setItemsPerPage,
-}: any) => {
-	const options = [10, 20, 30, 40]
+}: PaginationProps) => {
+	const options = ['10', '20', '30', '40']
 
 	const handleOptionChange = (option: any) => {
 		setItemsPerPage(option)
@@ -18,7 +19,7 @@ const Pagination = ({
 	const totalPages = Math.ceil(allStudentsNumber / itemsPerPage)
 
 	const getPageNumbers = () => {
-		let pageNumbers = []
+		let pageNumbers: (number | string)[] = []
 
 		if (totalPages > 0) {
 			if (totalPages <= 5) {
@@ -48,7 +49,7 @@ const Pagination = ({
 					<Dropdown>
 						<p>Pokaż:</p>
 						<SelectContainer>
-							<Select options={options} initialOption={10} onOptionChange={handleOptionChange} />
+							<Select options={options} initialOption={'10'} onOptionChange={handleOptionChange} />
 						</SelectContainer>
 						<p>
 							{studentsNumber} z {allStudentsNumber} uczniów
@@ -63,7 +64,7 @@ const Pagination = ({
 							<button
 								key={index}
 								className={pageNumber === currentPage ? 'active' : ''}
-								onClick={() => handlePageClick(pageNumber)}>
+								onClick={() => handlePageClick(Number(pageNumber))}>
 								{pageNumber}
 							</button>
 						))}

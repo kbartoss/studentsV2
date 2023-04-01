@@ -6,10 +6,6 @@ const { md } = MEDIA_QUERIES
 const StyledPagination = styled.div`
 	display: flex;
 	justify-content: space-between;
-
-	${md} {
-		display: none;
-	}
 `
 
 const Dropdown = styled.div`
@@ -28,6 +24,12 @@ const SelectContainer = styled.div`
 	width: 112px;
 	margin-left: 8px;
 	margin-right: 0;
+
+	${md}
+	{
+		width: 86px;
+		margin-right: 16px;
+	}
 `
 
 const PaginationContainer = styled.div`

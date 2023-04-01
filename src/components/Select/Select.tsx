@@ -4,8 +4,9 @@ import DropdownIcon from '../../icons/DropdownIcon/DropdownIcon'
 import { Option, Options, StyledSelect } from './Select.styles'
 import useClickOutside from '../../hooks/useClickOutside'
 import { mergeRefs } from 'react-merge-refs'
+import { SelectProps } from '../../theme/types'
 
-const Select = forwardRef(({ onOptionChange, initialOption, options, field }: any, ref) => {
+const Select = forwardRef(({ onOptionChange, initialOption, options, field }: SelectProps, ref) => {
 	const selectRef = useRef()
 	const [selectIsOpen, setSelectIsOpen] = useState(false)
 	const [selectedOption, setSelectedOption] = useState(initialOption)

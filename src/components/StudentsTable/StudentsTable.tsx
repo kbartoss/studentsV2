@@ -5,8 +5,9 @@ import Avatar from '../Avatar/Avatar'
 import Grade from '../Grade/Grade'
 import IconBox from '../IconBox/IconBox'
 import Table from '../Table/Table'
+import { StudentsTableProps } from '../../theme/types'
 
-const StudentsTable = ({ studentsData, searchQuery, editStudent, deleteStudent }: any) => {
+const StudentsTable = ({ studentsData, searchQuery, editStudent, deleteStudent }: StudentsTableProps) => {
 	const columns = useMemo(
 		() => [
 			{

@@ -1,7 +1,8 @@
 import SearchIcon from '../../icons/SearchIcon/SearchIcon'
+import { StudentsHeaderProps } from '../../theme/types'
 import { SearchBox, StyledHeader } from './StudentsHeader.styles'
 
-const StudentsHeader = ({ setSearchQuery, addStudent }: any) => {
+const StudentsHeader = ({ setSearchQuery, addStudent }: StudentsHeaderProps) => {
 	return (
 		<StyledHeader>
 			<h1>Lista uczniów</h1>

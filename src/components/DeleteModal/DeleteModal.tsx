@@ -7,15 +7,7 @@ import {
 	DeleteModalStudentInfo,
 	StyledDeleteModal,
 } from './DeleteModal.styles'
-
-type DeleteModalProps = {
-	cancelDelete: () => void
-	confirmDelete: () => void
-	selectedStudent: {
-		name: string
-		surname: string
-	}
-}
+import { DeleteModalProps } from '../../theme/types'
 
 const DeleteModal = ({ cancelDelete, confirmDelete, selectedStudent }: DeleteModalProps) => {
 	return (
@@ -23,7 +15,7 @@ const DeleteModal = ({ cancelDelete, confirmDelete, selectedStudent }: DeleteMod
 			<DeleteModalQuestion>Na pewno chcesz usunąć tego ucznia z listy?</DeleteModalQuestion>
 			<DeleteModalInfo>Ta operacja bezpowrotnie skasuje danego ucznia z bazy danych.</DeleteModalInfo>
 			<DeleteModalStudentInfo>
-				{selectedStudent.name} {selectedStudent.surname}
+				{selectedStudent?.name} {selectedStudent?.surname}
 			</DeleteModalStudentInfo>
 			<DeleteModalBtns>
 				<CancelBtn onClick={cancelDelete}>Anuluj</CancelBtn>

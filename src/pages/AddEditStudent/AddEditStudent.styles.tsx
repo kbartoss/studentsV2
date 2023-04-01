@@ -6,7 +6,9 @@ const { md } = MEDIA_QUERIES
 const StyledAddEditStudent = styled.div`
 	padding: 32px 48px;
 	flex: 1 1 auto;
-	overflow: auto;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 
 	h1 {
 		margin-bottom: 32px;
@@ -36,8 +38,8 @@ const StyledAddEditStudent = styled.div`
 
 	${md} {
 		padding: 24px 25px;
-		height: 100%; /* Add height: 100% to take up full screen height */
-		overflow: scroll; /* Add overflow: scroll to enable scrolling */
+		height: 100vh;
+		overflow: scroll;
 
 		h1 {
 			font-size: 24px;
@@ -125,4 +127,10 @@ const BackBtn = styled.button`
 	}
 `
 
-export { StyledAddEditStudent, InputTitle, ErrorText, AddEditPageBtns, BackBtn, ConfirmBtn }
+const FormWrapper = styled.div`
+	height: 100%;
+	overflow-y: auto;
+	max-height: calc(100% - 120px);
+`
+
+export { StyledAddEditStudent, InputTitle, ErrorText, AddEditPageBtns, BackBtn, ConfirmBtn, FormWrapper }

@@ -8,12 +8,14 @@ import {
 	BackBtn,
 	ConfirmBtn,
 	ErrorText,
+	FormWrapper,
 	InputTitle,
 	StyledAddEditStudent,
 } from './AddEditStudent.styles'
 import Input from '../../components/Input/Input'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { setStudentsData } from '../../redux/features/students/studentsSlice'
+import { Option, Student } from '../../theme/types'
 
 const AddEditStudent = () => {
 	const {
@@ -22,7 +24,7 @@ const AddEditStudent = () => {
 		control,
 		formState: { errors },
 	} = useForm({ mode: 'onChange' })
-	const onSubmit = (data: any) => console.log(data)
+	const onSubmit = (data: Student) => console.log(data)
 
 	const navigate = useNavigate()
 	const location = useLocation()
@@ -31,7 +33,7 @@ const AddEditStudent = () => {
 
 	const [grade, setGrade] = useState(selectedStudent?.grade || 1)
 
-	const handleOptionChange = (option: any) => {
+	const handleOptionChange = (option: Option) => {
 		setGrade(option)
 	}
 
@@ -39,7 +41,7 @@ const AddEditStudent = () => {
 		navigate(-1)
 	}
 
-	const handleAddEditStudent = async (data: any) => {
+	const handleAddEditStudent = async (data: Student) => {
 		try {
 			const newData = { ...data, grade: grade || 1 }
 			let error = null
@@ -68,65 +70,67 @@ const AddEditStudent = () => {
 		<StyledAddEditStudent>
 			<h1>{isEdit ? 'Edytuj' : 'Dodaj nowego'} ucznia</h1>
 
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<Input
-					title="Imię"
-					placeholder="Podaj imię ucznia"
-					defaultValue={selectedStudent?.name}
-					{...register('name', { required: true, minLength: 3, maxLength: 30, pattern: validName })}
-				/>
-				{errors.name && <ErrorText>Imię powinno mieć od 3 do 30 znaków</ErrorText>}
+			<FormWrapper>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<Input
+						title="Imię"
+						placeholder="Podaj imię ucznia"
+						defaultValue={selectedStudent?.name}
+						{...register('name', { required: true, minLength: 3, maxLength: 30, pattern: validName })}
+					/>
+					{errors.name && <ErrorText>Imię powinno mieć od 3 do 30 znaków</ErrorText>}
 
-				<Input
-					title="Nazwisko"
-					placeholder="Podaj nazwisko ucznia"
-					defaultValue={selectedStudent?.surname}
-					{...register('surname', { required: 'true', minLength: 3, maxLength: 30, pattern: validName })}
-				/>
-				{errors.surname && <ErrorText>Nazwisko powinno mieć od 3 do 30 znaków</ErrorText>}
+					<Input
+						title="Nazwisko"
+						placeholder="Podaj nazwisko ucznia"
+						defaultValue={selectedStudent?.surname}
+						{...register('surname', { required: 'true', minLength: 3, maxLength: 30, pattern: validName })}
+					/>
+					{errors.surname && <ErrorText>Nazwisko powinno mieć od 3 do 30 znaków</ErrorText>}
 
-				<Input
-					title="Numer telefonu"
-					type="number"
-					placeholder="Podaj numer telefonu ucznia"
-					defaultValue={selectedStudent?.phoneNumber}
-					{...register('phoneNumber', { required: true, minLength: 1, maxLength: 9, pattern: validPhone })}
-				/>
-				{errors.phoneNumber && <ErrorText>Numer telefonu powinien mieć od 1 do 9 cyfr</ErrorText>}
+					<Input
+						title="Numer telefonu"
+						type="number"
+						placeholder="Podaj numer telefonu ucznia"
+						defaultValue={selectedStudent?.phoneNumber}
+						{...register('phoneNumber', { required: true, minLength: 1, maxLength: 9, pattern: validPhone })}
+					/>
+					{errors.phoneNumber && <ErrorText>Numer telefonu powinien mieć od 1 do 9 cyfr</ErrorText>}
 
-				<Input
-					title="Adres e-mail"
-					placeholder="Podaj e-mail ucznia"
-					defaultValue={selectedStudent?.mail}
-					{...register('mail', { required: true, pattern: validMail })}
-				/>
-				{errors.mail && <ErrorText>Nieprawidłowy format adresu e-mail</ErrorText>}
+					<Input
+						title="Adres e-mail"
+						placeholder="Podaj e-mail ucznia"
+						defaultValue={selectedStudent?.mail}
+						{...register('mail', { required: true, pattern: validMail })}
+					/>
+					{errors.mail && <ErrorText>Nieprawidłowy format adresu e-mail</ErrorText>}
 
-				<Controller
-					name="grade"
-					control={control}
-					render={({ field }) => (
-						<>
-							<InputTitle>Wybierz ocenę</InputTitle>
-							<Select
-								{...field}
-								onOptionChange={handleOptionChange}
-								initialOption={isEdit ? selectedStudent?.grade : 1}
-								options={[1, 2, 3, 4, 5, 6]}
-							/>
-						</>
-					)}
-				/>
+					<Controller
+						name="grade"
+						control={control}
+						render={({ field }) => (
+							<>
+								<InputTitle>Wybierz ocenę</InputTitle>
+								<Select
+									{...field}
+									onOptionChange={handleOptionChange}
+									initialOption={isEdit ? selectedStudent?.grade : 1}
+									options={['1', '2', '3', '4', '5', '6']}
+								/>
+							</>
+						)}
+					/>
 
-				<AddEditPageBtns>
-					<BackBtn type="button" onClick={goBack}>
-						Powrót
-					</BackBtn>
-					<ConfirmBtn type="submit" onClick={handleSubmit(handleAddEditStudent)}>
-						{isEdit ? 'Zatwierdź' : 'Dodaj ucznia'}
-					</ConfirmBtn>
-				</AddEditPageBtns>
-			</form>
+					<AddEditPageBtns>
+						<BackBtn type="button" onClick={goBack}>
+							Powrót
+						</BackBtn>
+						<ConfirmBtn type="submit" onClick={handleSubmit(handleAddEditStudent)}>
+							{isEdit ? 'Zatwierdź' : 'Dodaj ucznia'}
+						</ConfirmBtn>
+					</AddEditPageBtns>
+				</form>
+			</FormWrapper>
 		</StyledAddEditStudent>
 	)
 }

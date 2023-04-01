@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
 	studentsData: [],
@@ -9,6 +9,7 @@ const initialState = {
 	showAddEditPage: false,
 	isEdit: false,
 	selectedStudent: {},
+	itemsPerPage: 10,
 }
 
 const studentsSlice = createSlice({
@@ -39,6 +40,9 @@ const studentsSlice = createSlice({
 		setSelectedStudent: (state, action) => {
 			state.selectedStudent = action.payload
 		},
+		setItemsPerPage: (state, action) => {
+			state.itemsPerPage = action.payload
+		},
 	},
 })
 
@@ -51,6 +55,7 @@ export const {
 	setShowAddEditPage,
 	setIsEdit,
 	setSelectedStudent,
+	setItemsPerPage,
 } = studentsSlice.actions
 
 export default studentsSlice.reducer

@@ -1,7 +1,8 @@
 import { useTable } from 'react-table'
 import { StyledTable } from '../StudentsTable/StudentsTable.styles'
+import { TableProps } from '../../theme/types'
 
-const Table = ({ columns, data, onRowClick }: any) => {
+const Table = ({ columns, data, onRowClick }: TableProps) => {
 	const tableInstance = useTable({ columns, data })
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance
 

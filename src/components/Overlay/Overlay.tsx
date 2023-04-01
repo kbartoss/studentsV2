@@ -1,6 +1,7 @@
+import { OverlayProps } from '../../theme/types'
 import { StyledOverlay } from './Overlay.styles'
 
-const Overlay = ({ closeModal }: any) => {
+const Overlay = ({ closeModal }: OverlayProps) => {
 	return <StyledOverlay onClick={closeModal}></StyledOverlay>
 }
 

@@ -23,6 +23,7 @@ const StyledDeleteModal = styled.div`
 		position: absolute;
 		width: 100%;
 		height: 100%;
+		overflow-y: auto;
 		border-radius: 0;
 		padding: 68px 24px;
 	}
@@ -69,6 +70,12 @@ const DeleteModalBtns = styled.div`
 	${md} {
 		flex-direction: column;
 		justify-content: flex-end;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 80%;
+		margin-bottom: 64px;
 	}
 `
 

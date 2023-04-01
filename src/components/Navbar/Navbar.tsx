@@ -1,7 +1,8 @@
 import { Squash as Hamburger } from 'hamburger-react'
 import { Nav, HamburgerDiv } from './Navbar.styles'
+import { NavbarProps } from '../../theme/types'
 
-const Navbar = ({ toggle }: any) => {
+const Navbar = ({ toggle }: NavbarProps) => {
 	return (
 		<Nav>
 			<HamburgerDiv onClick={toggle}>
