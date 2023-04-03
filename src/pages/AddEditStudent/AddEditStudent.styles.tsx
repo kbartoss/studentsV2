@@ -14,23 +14,6 @@ const StyledAddEditStudent = styled.div`
 		margin-bottom: 32px;
 	}
 
-	input {
-		padding: 14px 18px;
-		width: 80%;
-		height: 60px;
-		font-size: 18px;
-		font-weight: 400;
-		margin-bottom: 32px;
-		color: ${({ theme }) => theme.color.blackColor};
-		background: ${({ theme }) => theme.color.whiteColor};
-		border: 1px solid ${({ theme }) => theme.color.inputBorder};
-		border-radius: 12px;
-
-		&:focus {
-			outline: 1px solid ${({ theme }) => theme.color.blackColor};
-		}
-	}
-
 	input[type='number']::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		display: none;
@@ -46,18 +29,7 @@ const StyledAddEditStudent = styled.div`
 			font-weight: 500;
 			margin-bottom: 24px;
 		}
-
-		input {
-			width: 100%;
-			margin-bottom: 24px;
-		}
 	}
-`
-
-const InputTitle = styled.p`
-	font-weight: 500;
-	font-size: 20px;
-	margin-bottom: 12px;
 `
 
 const ErrorText = styled.p`
@@ -139,4 +111,4 @@ const FormWrapper = styled.div`
 	}
 `
 
-export { StyledAddEditStudent, InputTitle, ErrorText, AddEditPageBtns, BackBtn, ConfirmBtn, FormWrapper }
+export { StyledAddEditStudent, ErrorText, AddEditPageBtns, BackBtn, ConfirmBtn, FormWrapper }

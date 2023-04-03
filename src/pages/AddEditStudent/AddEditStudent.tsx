@@ -9,13 +9,13 @@ import {
 	ConfirmBtn,
 	ErrorText,
 	FormWrapper,
-	InputTitle,
 	StyledAddEditStudent,
 } from './AddEditStudent.styles'
 import Input from '../../components/Input/Input'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { setStudentsData } from '../../redux/features/students/studentsSlice'
 import { Option, Student } from '../../theme/types'
+import { InputTitle } from '../../components/Input/Input.styles'
 
 const AddEditStudent = () => {
 	const {

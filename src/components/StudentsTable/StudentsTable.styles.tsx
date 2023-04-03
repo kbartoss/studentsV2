@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { MEDIA_QUERIES } from '../../constants/mediaQueries'
 
-const { md, lg } = MEDIA_QUERIES
+const { md, lg, maxHeight1, maxHeight2 } = MEDIA_QUERIES
 
 const StyledTable = styled.table`
 	width: 100%;
@@ -85,6 +85,14 @@ const TableContainer = styled.div`
 	${md} {
 		margin-top: 12px;
 		max-height: calc(70vh - 150px);
+
+		${maxHeight2} {
+			max-height: calc(70vh - 90px);
+		}
+
+		${maxHeight1} {
+			max-height: calc(70vh - 150px);
+		}
 	}
 `
 

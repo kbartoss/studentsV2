@@ -15,10 +15,6 @@ const StyledInput = styled.input`
 	border: 1px solid ${({ theme }) => theme.color.inputBorder};
 	border-radius: 12px;
 
-	&:focus {
-		outline: 1px solid ${({ theme }) => theme.color.blackColor};
-	}
-
 	input[type='number']::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		display: none;

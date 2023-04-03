@@ -58,8 +58,7 @@ const SearchBox = styled.div`
 	${md} {
 		margin-left: 0;
 
-		input
-		{
+		input {
 			width: 70vw;
 		}
 	}

@@ -3,6 +3,8 @@ const MEDIA_QUERIES: { [key: string]: string } = {
 	md: `@media screen and (max-width: 768px)`,
 	lg: `@media screen and (max-width: 991px)`,
 	xl: `@media screen and (max-width: 1200px)`,
+	maxHeight1: '@media (max-height: 800px)',
+	maxHeight2: '@media (max-height: 965px)',
 }
 
 export { MEDIA_QUERIES }
