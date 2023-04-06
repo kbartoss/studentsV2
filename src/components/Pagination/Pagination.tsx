@@ -65,14 +65,18 @@ const Pagination = ({ studentsNumber }: PaginationProps) => {
 						<SideButton onClick={() => handlePageClick(currentPage - 1)} disabled={currentPage === 1}>
 							Poprzednia
 						</SideButton>
-						{getPageNumbers().map((pageNumber, index) => (
-							<button
-								key={index}
-								className={pageNumber === currentPage ? 'active' : ''}
-								onClick={() => handlePageClick(Number(pageNumber))}>
-								{pageNumber}
-							</button>
-						))}
+						{getPageNumbers().map((pageNumber, index) =>
+							pageNumber === '...' ? (
+								<span key={index}>{pageNumber}</span>
+							) : (
+								<button
+									key={index}
+									className={pageNumber === currentPage ? 'active' : ''}
+									onClick={() => handlePageClick(Number(pageNumber))}>
+									{pageNumber}
+								</button>
+							)
+						)}
 						<SideButton onClick={() => handlePageClick(currentPage + 1)} disabled={currentPage === totalPages}>
 							Następna
 						</SideButton>

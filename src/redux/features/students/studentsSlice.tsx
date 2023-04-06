@@ -23,7 +23,7 @@ const initialState: StudentsState = {
 	showDeleteModal: false,
 	showAddEditPage: false,
 	selectedStudent: {},
-	itemsPerPage: 3,
+	itemsPerPage: 10,
 	searchQuery: '',
 	selectIsOpen: false,
 }

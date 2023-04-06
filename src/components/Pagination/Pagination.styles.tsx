@@ -3,7 +3,7 @@ import { MEDIA_QUERIES } from '../../constants/mediaQueries'
 import { StyledSelect, Options, Option } from '../Select/Select.styles'
 import { StyledDropdownIcon } from '../../icons/DropdownIcon/DropdownIcon.style'
 
-const { md, lg } = MEDIA_QUERIES
+const { md, lg, mdPaginationWrap } = MEDIA_QUERIES
 
 const StyledPagination = styled.div`
 	display: flex;
@@ -106,7 +106,7 @@ const PaginationContainer = styled.div`
 	display: flex;
 	align-items: flex-end;
 	padding-left: 30px;
-	/* gap: 10px; */
+	gap: 10px;
 	
 	button {
 		height: 36px;
@@ -126,7 +126,7 @@ const PaginationContainer = styled.div`
 	span {
 		display: flex;
 		align-items: flex-end;
-		font-size: 36px;
+		font-size: 32px;
 		color: ${({ theme }) => theme.color.paginationSpan};
 	}
 
