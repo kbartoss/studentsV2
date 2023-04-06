@@ -1,19 +1,19 @@
 import { Dropdown, PaginationContainer, SelectContainer, SideButton, StyledPagination } from './Pagination.styles'
 import Select from '../Select/Select'
-import { PaginationProps } from '../../theme/types'
+import { useSelector, useDispatch } from 'react-redux'
+import { PaginationProps, StateProps } from '../../theme/types'
+import { setCurrentPage, setItemsPerPage } from '../../redux/features/students/studentsSlice'
 
-const Pagination = ({
-	studentsNumber,
-	allStudentsNumber,
-	itemsPerPage,
-	currentPage,
-	setCurrentPage,
-	setItemsPerPage,
-}: PaginationProps) => {
+const Pagination = ({ studentsNumber }: PaginationProps) => {
+	const dispatch = useDispatch()
+	const { allStudentsNumber, itemsPerPage, currentPage, selectIsOpen } = useSelector(
+		(state: StateProps) => state.students
+	)
+
 	const options = ['10', '20', '30', '40']
 
 	const handleOptionChange = (option: any) => {
-		setItemsPerPage(option)
+		dispatch(setItemsPerPage(option))
 	}
 
 	const totalPages = Math.ceil(allStudentsNumber / itemsPerPage)
@@ -39,7 +39,7 @@ const Pagination = ({
 	}
 
 	const handlePageClick = (pageNumber: number) => {
-		setCurrentPage(pageNumber)
+		dispatch(setCurrentPage(pageNumber))
 	}
 
 	return (
@@ -48,8 +48,13 @@ const Pagination = ({
 				<StyledPagination>
 					<Dropdown>
 						<p>Pokaż:</p>
-						<SelectContainer>
-							<Select options={options} initialOption={'10'} onOptionChange={handleOptionChange} />
+						<SelectContainer selectIsOpen={selectIsOpen}>
+							<Select
+								options={options}
+								initialOption={'10'}
+								onOptionChange={handleOptionChange}
+								selectIsOpen={selectIsOpen}
+							/>
 						</SelectContainer>
 						<p>
 							{studentsNumber} z {allStudentsNumber} uczniów

@@ -12,86 +12,76 @@ import theme from '../../theme/theme'
 import {
 	setStudentsData,
 	setAllStudentsNumber,
-	setLoading,
 	setCurrentPage,
 	setShowDeleteModal,
-	setIsEdit,
 	setSelectedStudent,
 	setSearchQuery,
-	setItemsPerPage,
 } from '../../redux/features/students/studentsSlice'
-import { connect } from 'react-redux/es/exports'
 import { useNavigate } from 'react-router-dom'
-import { StateProps, Student, StudentProps } from '../../theme/types'
+import { IsOpenProps, Student } from '../../theme/types'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchStudents } from '../../redux/thunks/students.thunks'
 
-const Students = ({
-	studentsData,
-	allStudentsNumber,
-	loading,
-	currentPage,
-	showDeleteModal,
-	selectedStudent,
-	setStudentsData,
-	setAllStudentsNumber,
-	setLoading,
-	setCurrentPage,
-	setShowDeleteModal,
-	setIsEdit,
-	setSelectedStudent,
-	isOpen,
-	searchQuery,
-	setSearchQuery,
-	itemsPerPage,
-	setItemsPerPage,
-}: StudentProps) => {
+const Students = ({ isOpen }: IsOpenProps) => {
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
+	const {
+		studentsData,
+		allStudentsNumber,
+		loading,
+		currentPage,
+		showDeleteModal,
+		selectedStudent,
+		searchQuery,
+		itemsPerPage,
+	} = useSelector(state => state.students)
 
 	useEffect(() => {
-		const fetchStudents = async () => {
-			try {
-				const { data: studentsData, count } = await supabase
-					.from(`listStudents`)
-					.select('*', { count: 'exact' })
-					.order('created_at', { ascending: true })
-				setStudentsData(studentsData as Student[])
-				setAllStudentsNumber(count ?? 0)
-				setLoading(false)
-			} catch (error) {
-				console.log('fetching error', error)
-			}
-		}
-		fetchStudents()
+		dispatch(fetchStudents())
 	}, [])
 
 	useEffect(() => {
-		setCurrentPage(1)
-	}, [itemsPerPage])
+		dispatch(setCurrentPage(1))
+	}, [itemsPerPage, searchQuery])
+
+	const filteredStudentsData = studentsData.filter(student => {
+		const fullName = `${student.name} ${student.surname}`
+		const searchQueryArr = searchQuery.toLowerCase().split(' ')
+		const containsSearchQuery = searchQueryArr.every(query => {
+			return (
+				student.name.toLowerCase().includes(query) ||
+				student.surname.toLowerCase().includes(query) ||
+				fullName.toLowerCase().includes(query)
+			)
+		})
+		return containsSearchQuery
+	})
 
 	const startIndex = (currentPage - 1) * itemsPerPage
 	const endIndex = startIndex + itemsPerPage
-	const displayedStudents = studentsData.slice(startIndex, endIndex).reverse()
+	const displayedStudents = filteredStudentsData.slice(startIndex, endIndex).reverse()
 
 	const deleteStudent = async (student: Student) => {
-		setSelectedStudent(student)
-		setShowDeleteModal(true)
+		dispatch(setSelectedStudent(student))
+		dispatch(setShowDeleteModal(true))
 	}
 
 	const confirmDelete = async () => {
 		try {
 			await supabase.from('listStudents').delete().eq('id', selectedStudent?.id)
 			const updatedData = studentsData.filter(student => student.id !== selectedStudent?.id)
-			setStudentsData(updatedData)
-			setSelectedStudent(null)
-			setAllStudentsNumber(allStudentsNumber - 1)
+			dispatch(setStudentsData(updatedData))
+			dispatch(setSelectedStudent(null))
+			dispatch(setAllStudentsNumber(allStudentsNumber - 1))
 		} catch (error) {
 			console.error('error deleting student', error)
 		}
-		setShowDeleteModal(false)
+		dispatch(setShowDeleteModal(false))
 	}
 
 	const cancelDelete = () => {
-		setShowDeleteModal(false)
-		setSelectedStudent(null)
+		dispatch(setShowDeleteModal(false))
+		dispatch(setSelectedStudent(null))
 	}
 
 	const addStudent = () => {
@@ -99,22 +89,19 @@ const Students = ({
 	}
 
 	const editStudent = async (student: Student) => {
-		setSelectedStudent(student)
-		setIsEdit(true)
-		navigate(`/students/${student.id}`, { state: { isEdit: true, selectedStudent: student } })
+		dispatch(setSelectedStudent(student))
+		navigate(`/students/${student.id}`, { state: { selectedStudent: student } })
 	}
 
 	const closeModal = () => {
-		setShowDeleteModal(false)
-		setSelectedStudent(null)
+		dispatch(setShowDeleteModal(false))
+		dispatch(setSelectedStudent(null))
 	}
-
-	const studentsNumber = displayedStudents.length
 
 	return (
 		<>
 			<StyledStudents isOpen={isOpen}>
-				<StudentsHeader setSearchQuery={setSearchQuery} addStudent={addStudent} />
+				<StudentsHeader setSearchQuery={query => dispatch(setSearchQuery(query))} addStudent={addStudent} />
 				<LoaderContainer>
 					<MoonLoader
 						color={theme.color.primaryColor}
@@ -125,19 +112,11 @@ const Students = ({
 					/>
 				</LoaderContainer>
 				<StudentsTable
-					studentsData={displayedStudents}
-					searchQuery={searchQuery}
+					filteredStudentsData={displayedStudents}
 					deleteStudent={deleteStudent}
 					editStudent={editStudent}
 				/>
-				<Pagination
-					studentsNumber={studentsNumber}
-					allStudentsNumber={allStudentsNumber}
-					currentPage={currentPage}
-					setCurrentPage={setCurrentPage}
-					itemsPerPage={itemsPerPage}
-					setItemsPerPage={setItemsPerPage}
-				/>
+				<Pagination studentsNumber={displayedStudents.length} />
 				{showDeleteModal && (
 					<>
 						<Overlay closeModal={closeModal}></Overlay>
@@ -148,29 +127,4 @@ const Students = ({
 		</>
 	)
 }
-
-const mapStateToProps = (state: StateProps) => ({
-	studentsData: state.students.studentsData,
-	allStudentsNumber: state.students.allStudentsNumber,
-	loading: state.students.loading,
-	currentPage: state.students.currentPage,
-	showDeleteModal: state.students.showDeleteModal,
-	isEdit: state.students.isEdit,
-	selectedStudent: state.students.selectedStudent,
-	searchQuery: state.students.searchQuery,
-	itemsPerPage: state.students.itemsPerPage,
-})
-
-const mapDispatchToProps = {
-	setStudentsData,
-	setAllStudentsNumber,
-	setLoading,
-	setCurrentPage,
-	setShowDeleteModal,
-	setIsEdit,
-	setSelectedStudent,
-	setSearchQuery,
-	setItemsPerPage,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Students)
+export default Students

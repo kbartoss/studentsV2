@@ -15,32 +15,11 @@ export type StateProps = {
 		loading: boolean
 		currentPage: number
 		showDeleteModal: boolean
-		isEdit: boolean
 		selectedStudent: Student | null
 		searchQuery: string
 		itemsPerPage: number
+		selectIsOpen: boolean
 	}
-}
-
-export type StudentProps = {
-	studentsData: Student[]
-	allStudentsNumber: number
-	loading: boolean
-	currentPage: number
-	showDeleteModal: boolean
-	selectedStudent: Student | null
-	setStudentsData: (data: Student[]) => void
-	setAllStudentsNumber: (count: number) => void
-	setLoading: (loading: boolean) => void
-	setCurrentPage: (page: number) => void
-	setShowDeleteModal: (show: boolean) => void
-	setIsEdit: (isEdit: boolean) => void
-	setSelectedStudent: (student: Student | null) => void
-	searchQuery: string
-	setSearchQuery: (query: string) => void
-	itemsPerPage: number
-	setItemsPerPage: (count: number) => void
-	isOpen: boolean
 }
 
 export type IsOpenProps = {
@@ -56,8 +35,7 @@ export type TableProps<Data extends object> = {
 }
 
 export type StudentsTableProps = {
-	studentsData: Student[]
-	searchQuery: string
+	filteredStudentsData: Student[]
 	editStudent: (student: Student) => void
 	deleteStudent: (student: Student) => void
 }
@@ -76,11 +54,6 @@ export type SelectProps = {
 
 export type PaginationProps = {
 	studentsNumber: number
-	allStudentsNumber: number
-	itemsPerPage: number
-	currentPage: number
-	setCurrentPage: (page: number) => void
-	setItemsPerPage: (itemsPerPage: number) => void
 }
 
 export type OverlayProps = {

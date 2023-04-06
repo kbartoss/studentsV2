@@ -17,18 +17,16 @@ import { setStudentsData } from '../../redux/features/students/studentsSlice'
 import { Option, Student } from '../../theme/types'
 import { InputTitle } from '../../components/Input/Input.styles'
 
-const AddEditStudent = () => {
+const AddEditStudent = ({ isEdit }: any) => {
 	const {
 		register,
 		handleSubmit,
 		control,
 		formState: { errors },
 	} = useForm({ mode: 'onChange' })
-	const onSubmit = (data: Student) => console.log(data)
 
 	const navigate = useNavigate()
 	const location = useLocation()
-	const isEdit = location.state?.isEdit
 	const selectedStudent = location.state?.selectedStudent
 
 	const [grade, setGrade] = useState(selectedStudent?.grade || 1)
@@ -71,14 +69,14 @@ const AddEditStudent = () => {
 			<h1>{isEdit ? 'Edytuj' : 'Dodaj nowego'} ucznia</h1>
 
 			<FormWrapper>
-				<form onSubmit={handleSubmit(onSubmit)}>
+				<form onSubmit={handleSubmit(handleAddEditStudent)}>
 					<Input
 						title="Imię"
 						placeholder="Podaj imię ucznia"
 						defaultValue={selectedStudent?.name}
 						{...register('name', { required: true, minLength: 3, maxLength: 30, pattern: validName })}
 					/>
-					{errors.name && <ErrorText>Imię powinno mieć od 3 do 30 znaków</ErrorText>}
+					{errors.name && <ErrorText>Imię powinno mieć od 3 do 30 znaków i nie zawierać cyfr.</ErrorText>}
 
 					<Input
 						title="Nazwisko"
@@ -86,7 +84,7 @@ const AddEditStudent = () => {
 						defaultValue={selectedStudent?.surname}
 						{...register('surname', { required: 'true', minLength: 3, maxLength: 30, pattern: validName })}
 					/>
-					{errors.surname && <ErrorText>Nazwisko powinno mieć od 3 do 30 znaków</ErrorText>}
+					{errors.surname && <ErrorText>Nazwisko powinno mieć od 3 do 30 znaków i nie zawierać cyfr.</ErrorText>}
 
 					<Input
 						title="Numer telefonu"
@@ -125,9 +123,7 @@ const AddEditStudent = () => {
 						<BackBtn type="button" onClick={goBack}>
 							Powrót
 						</BackBtn>
-						<ConfirmBtn type="submit" onClick={handleSubmit(handleAddEditStudent)}>
-							{isEdit ? 'Zatwierdź' : 'Dodaj ucznia'}
-						</ConfirmBtn>
+						<ConfirmBtn type="submit">{isEdit ? 'Zatwierdź' : 'Dodaj ucznia'}</ConfirmBtn>
 					</AddEditPageBtns>
 				</form>
 			</FormWrapper>

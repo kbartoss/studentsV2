@@ -1,16 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { fetchStudents } from '../../thunks/students.thunks'
+import { Student } from '../../../theme/types'
 
-const initialState = {
+type StudentsState = {
+	studentsData: Student[]
+	allStudentsNumber: number
+	loading: boolean
+	currentPage: number
+	showDeleteModal: boolean
+	showAddEditPage: boolean
+	selectedStudent: Student | null
+	itemsPerPage: number
+	searchQuery: string
+	selectIsOpen: boolean
+}
+
+const initialState: StudentsState = {
 	studentsData: [],
 	allStudentsNumber: 0,
 	loading: true,
 	currentPage: 1,
 	showDeleteModal: false,
 	showAddEditPage: false,
-	isEdit: false,
 	selectedStudent: {},
-	itemsPerPage: 10,
+	itemsPerPage: 3,
 	searchQuery: '',
+	selectIsOpen: false,
 }
 
 const studentsSlice = createSlice({
@@ -35,9 +50,6 @@ const studentsSlice = createSlice({
 		setShowAddEditPage: (state, action) => {
 			state.showAddEditPage = action.payload
 		},
-		setIsEdit: (state, action) => {
-			state.isEdit = action.payload
-		},
 		setSelectedStudent: (state, action) => {
 			state.selectedStudent = action.payload
 		},
@@ -47,6 +59,22 @@ const studentsSlice = createSlice({
 		setItemsPerPage: (state, action) => {
 			state.itemsPerPage = action.payload
 		},
+		setSelectIsOpen: (state, action) => {
+			state.selectIsOpen = action.payload
+		},
+	},
+	extraReducers: builder => {
+		builder.addCase(fetchStudents.pending, state => {
+			state.loading = true
+		})
+		builder.addCase(fetchStudents.fulfilled, (state, action) => {
+			state.loading = false
+			state.studentsData = action.payload.studentsData
+			state.allStudentsNumber = action.payload.count
+		})
+		builder.addCase(fetchStudents.rejected, state => {
+			state.loading = false
+		})
 	},
 })
 
@@ -57,10 +85,10 @@ export const {
 	setCurrentPage,
 	setShowDeleteModal,
 	setShowAddEditPage,
-	setIsEdit,
 	setSelectedStudent,
 	setSearchQuery,
 	setItemsPerPage,
+	setSelectIsOpen,
 } = studentsSlice.actions
 
 export default studentsSlice.reducer

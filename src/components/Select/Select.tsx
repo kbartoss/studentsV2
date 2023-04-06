@@ -5,11 +5,16 @@ import { Option, Options, StyledSelect } from './Select.styles'
 import useClickOutside from '../../hooks/useClickOutside'
 import { mergeRefs } from 'react-merge-refs'
 import { SelectProps } from '../../theme/types'
+import { useSelector, useDispatch } from 'react-redux'
+import { setSelectIsOpen } from '../../redux/features/students/studentsSlice'
 
 const Select = forwardRef(({ onOptionChange, initialOption, options, field }: SelectProps, ref) => {
 	const selectRef = useRef()
-	const [selectIsOpen, setSelectIsOpen] = useState(false)
 	const [selectedOption, setSelectedOption] = useState(initialOption)
+
+	const selectIsOpen = useSelector(state => state.students.selectIsOpen)
+
+	const dispatch = useDispatch()
 
 	const handleOptionClick = (option: any) => {
 		setSelectedOption(option)
@@ -17,20 +22,22 @@ const Select = forwardRef(({ onOptionChange, initialOption, options, field }: Se
 	}
 
 	const toggleSelect = () => {
-		setSelectIsOpen(prevIsSelectOpen => !prevIsSelectOpen)
+		dispatch(setSelectIsOpen(!selectIsOpen))
 	}
 
-	useClickOutside(selectRef, () => setSelectIsOpen(false))
+	useClickOutside(selectRef, () => dispatch(setSelectIsOpen(false)))
 
 	return (
 		<StyledSelect onClick={toggleSelect} ref={mergeRefs([selectRef, ref])} {...field} selectIsOpen={selectIsOpen}>
 			<DropdownIcon selectIsOpen={selectIsOpen} />
-			<div>{selectedOption}</div>
+			<div>
+				<span>{selectedOption}</span>
+			</div>
 			{selectIsOpen && (
 				<Options>
 					{options.map(option => (
 						<Option key={option} onClick={() => handleOptionClick(option)}>
-							{option}
+							<span>{option}</span>
 						</Option>
 					))}
 				</Options>

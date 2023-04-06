@@ -35,7 +35,8 @@ const Options = styled.div`
 	border-radius: 12px;
 	left: 0;
 	position: absolute;
-	top: 100%;
+	top: auto;
+	bottom: 100%;
 	width: 100%;
 
 	${md} {

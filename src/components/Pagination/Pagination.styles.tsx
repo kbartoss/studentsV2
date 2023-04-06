@@ -1,12 +1,23 @@
 import styled from 'styled-components'
 import { MEDIA_QUERIES } from '../../constants/mediaQueries'
+import { StyledSelect, Options, Option } from '../Select/Select.styles'
+import { StyledDropdownIcon } from '../../icons/DropdownIcon/DropdownIcon.style'
 
-const { md } = MEDIA_QUERIES
+const { md, lg } = MEDIA_QUERIES
 
 const StyledPagination = styled.div`
 	display: flex;
 	justify-content: space-between;
+	position: absolute;
+	bottom: 80px;
+	left: 0;
+	right: 0;
+	padding: 0 48px;
 	margin-top: 20px;
+
+	${lg} {
+		bottom: 60px;
+	}
 
 	${md} {
 		position: fixed;
@@ -27,7 +38,6 @@ const Dropdown = styled.div`
 	display: flex;
 	margin-top: 30px;
 	align-items: center;
-	height: 10px;
 
 	p {
 		font-weight: 400;
@@ -37,23 +47,57 @@ const Dropdown = styled.div`
 	}
 
 	${md} {
-		margin-right: 10px;
 		p {
 			font-size: 16px;
 		}
 	}
 `
 const SelectContainer = styled.div`
-	width: 112px;
 	margin-left: 8px;
-	margin-right: 0;
+	margin-right: 16px;
 
-	${md} {
-		width: 86px;
-		margin-right: 8px;
+	${StyledSelect} {
+		width: 73px;
+		height: 48px;
+		font-size: 18px;
 
-		& > * {
-			height: 40px;
+		div {
+			span {
+				margin-left: -6px;
+			}
+		}
+
+		${StyledDropdownIcon} {
+			right: 12px;
+
+			${md} {
+				right: 12px;
+			}
+		}
+
+		${md} {
+			div {
+				span {
+					margin-left: -10px;
+				}
+			}
+		}
+	}
+
+	${Options} {
+		top: auto;
+		bottom: 100%;
+
+		span {
+			margin-left: -6px;
+		}
+	}
+
+	${Option} {
+		${md} {
+			span {
+				padding-left: 2px;
+			}
 		}
 	}
 `
@@ -61,9 +105,9 @@ const SelectContainer = styled.div`
 const PaginationContainer = styled.div`
 	display: flex;
 	align-items: flex-end;
-	margin-top: 30px;
-	gap: 10px;
-
+	padding-left: 30px;
+	/* gap: 10px; */
+	
 	button {
 		height: 36px;
 		padding: 6px 10px;
@@ -84,6 +128,11 @@ const PaginationContainer = styled.div`
 		align-items: flex-end;
 		font-size: 36px;
 		color: ${({ theme }) => theme.color.paginationSpan};
+	}
+
+	${md} {
+		margin-top: 12px;
+		padding: 0;
 	}
 `
 

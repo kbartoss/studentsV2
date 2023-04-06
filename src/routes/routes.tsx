@@ -10,7 +10,7 @@ function CustomRoutes({ isOpen }: IsOpenProps) {
 			<Route path="/" element={<Start isOpen={isOpen} />} />
 			<Route path="/students" element={<Students isOpen={isOpen} />} />
 			<Route path="/students/add" element={<AddEditStudent />} />
-			<Route path="/students/:studentId/*" element={<AddEditStudent />} />
+			<Route path="/students/:studentId/*" element={<AddEditStudent isEdit />} />
 		</Routes>
 	)
 }

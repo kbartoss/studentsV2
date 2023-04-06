@@ -7,7 +7,7 @@ import IconBox from '../IconBox/IconBox'
 import Table from '../Table/Table'
 import { StudentsTableProps } from '../../theme/types'
 
-const StudentsTable = ({ studentsData, searchQuery, editStudent, deleteStudent }: StudentsTableProps) => {
+const StudentsTable = ({ filteredStudentsData, editStudent, deleteStudent }: StudentsTableProps) => {
 	const columns = useMemo(
 		() => [
 			{
@@ -70,23 +70,9 @@ const StudentsTable = ({ studentsData, searchQuery, editStudent, deleteStudent }
 		[]
 	)
 
-	const search = () => {
-		return studentsData.filter(student => {
-			const fullName = `${student.name} ${student.surname}`
-			const searchQueryArr = searchQuery.toLowerCase().split(' ')
-			const containsSearchQuery = searchQueryArr.every(query => {
-				return (
-					student.name.toLowerCase().includes(query) ||
-					student.surname.toLowerCase().includes(query) ||
-					fullName.toLowerCase().includes(query)
-				)
-			})
-			return containsSearchQuery
-		})
-	}
 	const data = useMemo(
 		() =>
-			search()
+			filteredStudentsData
 				.map(student => ({
 					id: student.id,
 					name: student.name,
@@ -98,7 +84,7 @@ const StudentsTable = ({ studentsData, searchQuery, editStudent, deleteStudent }
 					actions: '',
 				}))
 				.sort((a, b) => a.id - b.id),
-		[studentsData, searchQuery]
+		[filteredStudentsData]
 	)
 
 	return (
