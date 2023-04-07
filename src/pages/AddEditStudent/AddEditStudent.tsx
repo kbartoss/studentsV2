@@ -1,4 +1,4 @@
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, useForm, FieldValues } from 'react-hook-form'
 import Select from '../../components/Select/Select'
 import { validPhone, validMail, validName } from '../../constants/regex'
 import { supabase } from '../../api/supabaseClient'
@@ -14,7 +14,7 @@ import {
 import Input from '../../components/Input/Input'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { setStudentsData } from '../../redux/features/students/studentsSlice'
-import { Option, Student } from '../../theme/types'
+import { Option } from '../../theme/types'
 import { InputTitle } from '../../components/Input/Input.styles'
 
 const AddEditStudent = ({ isEdit }: any) => {
@@ -39,7 +39,7 @@ const AddEditStudent = ({ isEdit }: any) => {
 		navigate(-1)
 	}
 
-	const handleAddEditStudent = async (data: Student) => {
+	const handleAddEditStudent = async (data: FieldValues) => {
 		try {
 			const newData = { ...data, grade: grade || 1 }
 			let error = null

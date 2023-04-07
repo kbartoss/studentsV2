@@ -3,7 +3,7 @@ import { MEDIA_QUERIES } from '../../constants/mediaQueries'
 
 const { md } = MEDIA_QUERIES
 
-const StyledSelect = styled.div`
+const StyledSelect = styled.div<{ selectIsOpen: boolean }>`
 	position: relative;
 	display: flex;
 	align-items: center;

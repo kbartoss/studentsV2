@@ -55,7 +55,6 @@ const Pagination = ({ studentsNumber }: PaginationProps) => {
 								options={options}
 								initialOption={'10'}
 								onOptionChange={handleOptionChange}
-								selectIsOpen={selectIsOpen}
 							/>
 						</SelectContainer>
 						<p>

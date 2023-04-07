@@ -5,7 +5,7 @@ import { StyledDropdownIcon } from '../../icons/DropdownIcon/DropdownIcon.style'
 
 const { md, openSidebarWrap } = MEDIA_QUERIES
 
-const getOpenSidebarWrapStyles = isOpen => {
+const getOpenSidebarWrapStyles = (isOpen: boolean) => {
 	if (isOpen) {
 		return `
 		position: absolute;
@@ -34,7 +34,6 @@ const StyledPagination = styled.div<{ isOpen: boolean }>`
 	right: 0;
 	padding: 0 48px;
 	margin-top: 20px;
-
 
 	${openSidebarWrap} {
 		${({ isOpen }) => getOpenSidebarWrapStyles(isOpen)}
@@ -73,7 +72,7 @@ const Dropdown = styled.div`
 		}
 	}
 `
-const SelectContainer = styled.div`
+const SelectContainer = styled.div<{ selectIsOpen: boolean }>`
 	margin-left: 8px;
 	margin-right: 16px;
 

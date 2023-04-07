@@ -1,8 +1,11 @@
 import { useTable } from 'react-table'
 import { StyledTable } from '../StudentsTable/StudentsTable.styles'
 import { TableProps } from '../../theme/types'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
 
-const Table = ({ columns, data, onRowClick, isOpen }: TableProps) => {
+const Table = <Data extends object>({ columns, data, onRowClick }: TableProps<Data>) => {
+	const isOpen = useSelector((state: RootState) => state.students.isOpen)
 	const tableInstance = useTable({ columns, data })
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance
 

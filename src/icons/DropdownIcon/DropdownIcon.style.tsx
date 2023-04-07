@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const StyledDropdownIcon = styled.svg`
+const StyledDropdownIcon = styled.svg<{ selectIsOpen: boolean }>`
 	position: absolute;
 	right: 14px;
 	margin-top: 10px;

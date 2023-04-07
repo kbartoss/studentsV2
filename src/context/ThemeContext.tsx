@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react'
-import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import theme from '../theme/theme'
 
 const defaultThemeContext = {
@@ -18,11 +18,10 @@ const ThemeProvider = ({ children }: any) => {
 	}
 
 	return (
-        <ThemeContext.Provider value={value}>
-           <StyledThemeProvider theme={currentTheme}>{children}</StyledThemeProvider>
-        </ThemeContext.Provider>
-    )
+		<ThemeContext.Provider value={value}>
+			<StyledThemeProvider theme={currentTheme}>{children}</StyledThemeProvider>
+		</ThemeContext.Provider>
+	)
 }
 
-
-export {ThemeContext, ThemeProvider}
+export { ThemeContext, ThemeProvider }

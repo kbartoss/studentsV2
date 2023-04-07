@@ -46,7 +46,7 @@ export type StudentsHeaderProps = {
 }
 
 export type SelectProps = {
-	onOptionChange: (option: string) => void
+	onOptionChange?: (option: Option) => void
 	initialOption: string
 	options: string[]
 	field?: Record<string, unknown>
@@ -69,6 +69,7 @@ export type InputProps = {
 	title: string
 	placeholder: string
 	defaultValue?: string
+	type?: string
 }
 
 export type IconBoxProps = {

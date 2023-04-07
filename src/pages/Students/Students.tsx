@@ -21,11 +21,11 @@ import { useNavigate } from 'react-router-dom'
 import { Student } from '../../theme/types'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchStudents } from '../../redux/thunks/students.thunks'
-import { RootState } from '../../redux/store'
+import { AppDispatch, RootState } from '../../redux/store'
 
 const Students = () => {
 	const navigate = useNavigate()
-	const dispatch = useDispatch()
+	const dispatch = useDispatch<AppDispatch>()
 	const {
 		isOpen,
 		studentsData,

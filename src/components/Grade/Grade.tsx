@@ -16,11 +16,7 @@ const Grade = ({ value }: GradeProps) => {
 		}
 	}
 
-	return (
-		<StyledGrade style={{ backgroundColor: gradeColor(value) }}>
-			{value}
-		</StyledGrade>
-	)
+	return <StyledGrade style={{ backgroundColor: gradeColor(value) }}>{value}</StyledGrade>
 }
 
 export default Grade
