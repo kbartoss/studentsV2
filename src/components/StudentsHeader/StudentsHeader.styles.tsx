@@ -1,15 +1,26 @@
 import styled from 'styled-components'
 import { MEDIA_QUERIES } from '../../constants/mediaQueries'
 
-const { md } = MEDIA_QUERIES
+const { md, openSidebarWrap } = MEDIA_QUERIES
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.div<{ isOpen: boolean }>`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 
 	h1 {
 		font-size: 32px;
+	}
+
+	${openSidebarWrap} {
+		flex-direction: ${({ isOpen }) => (isOpen ? 'column' : 'row')};
+		align-items: ${({ isOpen }) => (isOpen ? 'flex-start' : '')};
+		margin-left: ${({ isOpen }) => (isOpen ? '0' : '0')};
+
+		h1 {
+			font-size: ${({ isOpen }) => (isOpen ? '30px' : '')};
+			margin-bottom: ${({ isOpen }) => (isOpen ? '24px' : '0')};
+		}
 	}
 
 	${md} {
@@ -24,7 +35,7 @@ const StyledHeader = styled.div`
 	}
 `
 
-const SearchBox = styled.div`
+const SearchBox = styled.div<{ isOpen: boolean }>`
 	display: flex;
 	position: relative;
 	margin-left: auto;
@@ -53,6 +64,14 @@ const SearchBox = styled.div`
 		border: none;
 		border-radius: 12px;
 		cursor: pointer;
+	}
+
+	${openSidebarWrap} {
+		margin-left: ${({ isOpen }) => (isOpen ? '0' : '')};
+
+		input {
+			width: ${({ isOpen }) => (isOpen ? '42vw' : '')};
+		}
 	}
 
 	${md} {

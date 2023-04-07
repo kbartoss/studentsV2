@@ -2,12 +2,12 @@ import { NavLink } from 'react-router-dom'
 import { StyledSidebar } from './Sidebar.styles'
 import StudentsIcon from '../../icons/StudentsIcon'
 import StartIcon from '../../icons/StartIcon'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
 
-type SidebarProps = {
-	isOpen: boolean
-}
+const Sidebar = () => {
+	const isOpen = useSelector((state: RootState) => state.students.isOpen)
 
-const Sidebar = ({ isOpen }: SidebarProps) => {
 	return (
 		<StyledSidebar isOpen={isOpen}>
 			<NavLink to="/">

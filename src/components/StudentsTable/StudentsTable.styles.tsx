@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import { MEDIA_QUERIES } from '../../constants/mediaQueries'
 
-const { md, lg, maxHeight1, maxHeight2 } = MEDIA_QUERIES
+const { md, maxHeight1, maxHeight2, openSidebarWrap } = MEDIA_QUERIES
 
-const StyledTable = styled.table`
+const StyledTable = styled.table<{ isOpen: boolean }>`
 	width: 100%;
 	border-spacing: 0 12px;
 
@@ -14,6 +14,7 @@ const StyledTable = styled.table`
 		tr {
 			th {
 				padding: 10px 24px;
+				white-space: nowrap;
 			}
 		}
 	}
@@ -46,6 +47,18 @@ const StyledTable = styled.table`
 		}
 	}
 
+	${openSidebarWrap} {
+		thead {
+			font-size: ${({ isOpen }) => (isOpen ? '20px' : '')};
+
+			tr {
+				th {
+					padding: ${({ isOpen }) => (isOpen ? '5px 12px' : '')};
+				}
+			}
+		}
+	}
+
 	${md} {
 		margin-top: 0;
 		width: 100vw;
@@ -73,13 +86,14 @@ const StyledTable = styled.table`
 	}
 `
 
-const TableContainer = styled.div`
+const TableContainer = styled.div<{ isOpen: boolean }>`
 	margin-top: 38px;
 	max-height: calc(70vh - 90px);
 	overflow-y: auto;
 
-	${lg} {
-		max-height: calc(70vh - 60px);
+	${openSidebarWrap} {
+		margin-top: ${({ isOpen }) => (isOpen ? '12px' : '')};
+		max-height: ${({ isOpen }) => (isOpen ? 'calc(70vh - 100px)' : '')};
 	}
 
 	${md} {

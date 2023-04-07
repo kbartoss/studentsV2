@@ -5,7 +5,7 @@ const MEDIA_QUERIES: { [key: string]: string } = {
 	xl: `@media screen and (max-width: 1200px)`,
 	maxHeight1: '@media (max-height: 800px)',
 	maxHeight2: '@media (max-height: 965px)',
-	mdPaginationWrap: `@media screen and (max-width: 882px)`,
+	openSidebarWrap: `@media screen and (max-width: 962px)`,
 }
 
 export { MEDIA_QUERIES }

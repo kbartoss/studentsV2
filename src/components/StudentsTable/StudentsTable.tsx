@@ -6,8 +6,11 @@ import Grade from '../Grade/Grade'
 import IconBox from '../IconBox/IconBox'
 import Table from '../Table/Table'
 import { StudentsTableProps } from '../../theme/types'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
 
 const StudentsTable = ({ filteredStudentsData, editStudent, deleteStudent }: StudentsTableProps) => {
+	const isOpen = useSelector((state: RootState) => state.students.isOpen)
 	const columns = useMemo(
 		() => [
 			{
@@ -88,8 +91,8 @@ const StudentsTable = ({ filteredStudentsData, editStudent, deleteStudent }: Stu
 	)
 
 	return (
-		<TableContainer>
-			<Table columns={columns} data={data} onRowClick={editStudent} />
+		<TableContainer isOpen={isOpen}>
+			<Table columns={columns} data={data} onRowClick={editStudent} isOpen={isOpen} />
 		</TableContainer>
 	)
 }

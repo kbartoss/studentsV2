@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { MEDIA_QUERIES } from '../../constants/mediaQueries'
 
-const { md } = MEDIA_QUERIES
+const { md, lg } = MEDIA_QUERIES
 
 const StyledAddEditStudent = styled.div`
 	padding: 32px 48px;
@@ -104,7 +104,12 @@ const FormWrapper = styled.div`
 	overflow-y: auto;
 	max-height: calc(100% - 120px);
 
+	${lg} {
+		width: 82%;
+	}
+
 	${md} {
+		width: 100%;
 		height: 100%;
 		overflow-y: auto;
 		max-height: calc(100% - 120px);

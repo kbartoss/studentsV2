@@ -2,12 +2,12 @@ import { useTable } from 'react-table'
 import { StyledTable } from '../StudentsTable/StudentsTable.styles'
 import { TableProps } from '../../theme/types'
 
-const Table = ({ columns, data, onRowClick }: TableProps) => {
+const Table = ({ columns, data, onRowClick, isOpen }: TableProps) => {
 	const tableInstance = useTable({ columns, data })
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance
 
 	return (
-		<StyledTable {...getTableProps()}>
+		<StyledTable isOpen={isOpen} {...getTableProps()}>
 			<thead>
 				{headerGroups.map(headerGroup => (
 					<tr {...headerGroup.getHeaderGroupProps()}>

@@ -3,9 +3,29 @@ import { MEDIA_QUERIES } from '../../constants/mediaQueries'
 import { StyledSelect, Options, Option } from '../Select/Select.styles'
 import { StyledDropdownIcon } from '../../icons/DropdownIcon/DropdownIcon.style'
 
-const { md, lg, mdPaginationWrap } = MEDIA_QUERIES
+const { md, openSidebarWrap } = MEDIA_QUERIES
 
-const StyledPagination = styled.div`
+const getOpenSidebarWrapStyles = isOpen => {
+	if (isOpen) {
+		return `
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin-bottom: 20px;
+		width: 50%;
+		margin-left: auto;
+		margin-right: auto;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+	  `
+	}
+
+	return ''
+}
+
+const StyledPagination = styled.div<{ isOpen: boolean }>`
 	display: flex;
 	justify-content: space-between;
 	position: absolute;
@@ -15,8 +35,9 @@ const StyledPagination = styled.div`
 	padding: 0 48px;
 	margin-top: 20px;
 
-	${lg} {
-		bottom: 60px;
+
+	${openSidebarWrap} {
+		${({ isOpen }) => getOpenSidebarWrapStyles(isOpen)}
 	}
 
 	${md} {
@@ -102,12 +123,12 @@ const SelectContainer = styled.div`
 	}
 `
 
-const PaginationContainer = styled.div`
+const PaginationContainer = styled.div<{ isOpen: boolean }>`
 	display: flex;
 	align-items: flex-end;
 	padding-left: 30px;
 	gap: 10px;
-	
+
 	button {
 		height: 36px;
 		padding: 6px 10px;
@@ -128,6 +149,11 @@ const PaginationContainer = styled.div`
 		align-items: flex-end;
 		font-size: 32px;
 		color: ${({ theme }) => theme.color.paginationSpan};
+	}
+
+	${openSidebarWrap} {
+		margin-top: ${({ isOpen }) => (isOpen ? '12px' : '')};
+		padding: ${({ isOpen }) => (isOpen ? '0' : '')};
 	}
 
 	${md} {

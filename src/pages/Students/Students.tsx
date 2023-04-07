@@ -18,14 +18,16 @@ import {
 	setSearchQuery,
 } from '../../redux/features/students/studentsSlice'
 import { useNavigate } from 'react-router-dom'
-import { IsOpenProps, Student } from '../../theme/types'
+import { Student } from '../../theme/types'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchStudents } from '../../redux/thunks/students.thunks'
+import { RootState } from '../../redux/store'
 
-const Students = ({ isOpen }: IsOpenProps) => {
+const Students = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const {
+		isOpen,
 		studentsData,
 		allStudentsNumber,
 		loading,
@@ -34,7 +36,7 @@ const Students = ({ isOpen }: IsOpenProps) => {
 		selectedStudent,
 		searchQuery,
 		itemsPerPage,
-	} = useSelector(state => state.students)
+	} = useSelector((state: RootState) => state.students)
 
 	useEffect(() => {
 		dispatch(fetchStudents())

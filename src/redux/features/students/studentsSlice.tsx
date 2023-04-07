@@ -13,6 +13,7 @@ type StudentsState = {
 	itemsPerPage: number
 	searchQuery: string
 	selectIsOpen: boolean
+	isOpen: boolean
 }
 
 const initialState: StudentsState = {
@@ -26,6 +27,7 @@ const initialState: StudentsState = {
 	itemsPerPage: 10,
 	searchQuery: '',
 	selectIsOpen: false,
+	isOpen: false,
 }
 
 const studentsSlice = createSlice({
@@ -62,6 +64,9 @@ const studentsSlice = createSlice({
 		setSelectIsOpen: (state, action) => {
 			state.selectIsOpen = action.payload
 		},
+		toggleIsOpen: state => {
+			state.isOpen = !state.isOpen
+		},
 	},
 	extraReducers: builder => {
 		builder.addCase(fetchStudents.pending, state => {
@@ -89,6 +94,7 @@ export const {
 	setSearchQuery,
 	setItemsPerPage,
 	setSelectIsOpen,
+	toggleIsOpen,
 } = studentsSlice.actions
 
 export default studentsSlice.reducer

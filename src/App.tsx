@@ -1,15 +1,18 @@
-import { useState } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Sidebar from './components/Sidebar/Sidebar'
 import { MainPageContainer } from './styles/MainPageConatiner'
 import GlobalStyles from './theme/GlobalStyles'
 import CustomRoutes from './routes/routes'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleIsOpen } from './redux/features/students/studentsSlice'
+import { RootState } from './redux/store'
 
 function App() {
-	const [isOpen, setIsOpen] = useState<boolean>(false)
+	const isOpen = useSelector((state: RootState) => state.students.isOpen)
+	const dispatch = useDispatch()
 
 	const toggle = () => {
-		setIsOpen(prevIsOpen => !prevIsOpen)
+		dispatch(toggleIsOpen())
 	}
 
 	return (
@@ -17,8 +20,8 @@ function App() {
 			<GlobalStyles />
 			<Navbar toggle={toggle} />
 			<MainPageContainer>
-				<Sidebar isOpen={isOpen} />
-				<CustomRoutes isOpen={isOpen} />
+				<Sidebar />
+				<CustomRoutes />
 			</MainPageContainer>
 		</>
 	)

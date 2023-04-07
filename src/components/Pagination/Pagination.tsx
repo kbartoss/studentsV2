@@ -3,8 +3,10 @@ import Select from '../Select/Select'
 import { useSelector, useDispatch } from 'react-redux'
 import { PaginationProps, StateProps } from '../../theme/types'
 import { setCurrentPage, setItemsPerPage } from '../../redux/features/students/studentsSlice'
+import { RootState } from '../../redux/store'
 
 const Pagination = ({ studentsNumber }: PaginationProps) => {
+	const isOpen = useSelector((state: RootState) => state.students.isOpen)
 	const dispatch = useDispatch()
 	const { allStudentsNumber, itemsPerPage, currentPage, selectIsOpen } = useSelector(
 		(state: StateProps) => state.students
@@ -45,7 +47,7 @@ const Pagination = ({ studentsNumber }: PaginationProps) => {
 	return (
 		<>
 			{allStudentsNumber > 0 && (
-				<StyledPagination>
+				<StyledPagination isOpen={isOpen}>
 					<Dropdown>
 						<p>Pokaż:</p>
 						<SelectContainer selectIsOpen={selectIsOpen}>
@@ -61,7 +63,7 @@ const Pagination = ({ studentsNumber }: PaginationProps) => {
 						</p>
 					</Dropdown>
 
-					<PaginationContainer>
+					<PaginationContainer isOpen={isOpen}>
 						<SideButton onClick={() => handlePageClick(currentPage - 1)} disabled={currentPage === 1}>
 							Poprzednia
 						</SideButton>
