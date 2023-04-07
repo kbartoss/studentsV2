@@ -3,7 +3,7 @@ import { MEDIA_QUERIES } from '../../constants/mediaQueries'
 import { StyledSelect, Options, Option } from '../Select/Select.styles'
 import { StyledDropdownIcon } from '../../icons/DropdownIcon/DropdownIcon.style'
 
-const { md, openSidebarWrap } = MEDIA_QUERIES
+const { md, openSidebarWrap, maxHeight1 } = MEDIA_QUERIES
 
 const getOpenSidebarWrapStyles = (isOpen: boolean) => {
 	if (isOpen) {
@@ -33,7 +33,10 @@ const StyledPagination = styled.div<{ isOpen: boolean }>`
 	left: 0;
 	right: 0;
 	padding: 0 48px;
-	margin-top: 20px;
+
+	${maxHeight1} {
+		bottom: 40px;
+	}
 
 	${openSidebarWrap} {
 		${({ isOpen }) => getOpenSidebarWrapStyles(isOpen)}
@@ -56,7 +59,6 @@ const StyledPagination = styled.div<{ isOpen: boolean }>`
 
 const Dropdown = styled.div`
 	display: flex;
-	margin-top: 30px;
 	align-items: center;
 
 	p {
