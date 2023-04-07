@@ -7,7 +7,7 @@ const StyledSidebar = styled.div<{ isOpen: boolean }>`
 	background-color: ${({ theme }) => theme.color.secondaryColor};
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 	transition: flex 0.3s;
-	flex: ${({ isOpen }) => (isOpen ? '0 0 310px' : '0 0 0px')};
+	flex: ${({ isOpen }) => (isOpen ? '0 0 310px' : '0 0 94px')};
 
 	a {
 		padding: 18px 26px 18px 32px;
