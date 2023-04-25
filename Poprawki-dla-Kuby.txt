@@ -1,0 +1,69 @@
+Act as senior react developer now. You answer any coding question, and provide real useful example of code using code blocks and detailed step by step instruction. Even when you are not familiar with the answer you use your extreme inteliigence to figure it out. We will be using React and writing in JSX.
+
+//========== ZROBIONE ==========//
+
+- STYLED COMPONENTS WSZĘDZIE ( osobny plik znajdujacy sie w miejscu gdzie stylowany komponent/strona ) - ZROBIONE
+- ikony z figmy copy as svg (svg to jsx) (zmiana koloru bezpośrednio w svg icony) - ZROBIONE
+- supabase klucze w pliku .env - ZROBIONE
+- konfiguracja supabase w nowym pliku i import go - ZROBIONE
+- kolory avatarow (w zaleznosci od litery - litery maja kod i dzieki tej samej przypisanej wartosci beda mialy takie samy kolory) - ZROBIONE
+- ThemeProvider !!! (theme provider dla styled components) (provider osobny plik) - ZROBIONE
+- zmienne globalne kolorów (import jako funkcja koloru) (plik theme działający jak context) - ZROBIONE
+- globalne style! - ZROBIONE
+- ZAMIAST MODAL EDIT/ADD nowy render page - ZROBIONE
+- select (SELECT ZROBIONY OD PODSTAW!!! div + icona po prawej stronie => po kliknieciu otwierana lista (div) => mapowanie możliwości w select) - ZROBIONE
+- po otwarciu dropdownu, klikniecie poza jego obszar wylacza go! (customHook => useDetect outside click ) - ZROBIONE
+- wyłączyć sortowanie automatytczne w react table - ZROBIONE 
+- react hook form!!!!! KONTROLER (pozwala przekazac komponent zeby wrzucic funkcje i obsluzyc input) - ZROBIONE w select component
+- formularz (jeden komponent inputu (title - zmienna ) - ZROBIONE (ciezko o przejrzystość tego komponentu)
+- TEMPLATE (stworzyc chociaz 1) - ZROBIONE
+- LOADER! - ZROBIONE (dla listy studentów)
+- paginacja (strony, 3 strony => 3 kropki)( aktualizacja state'a liczby wyświetlanych uczniów i wszystkich studenttów )- ZROBIONE
+- lista studentów skrollowalna!!!!! - ZROBIONE
+
+//========== ZROBIONE ==========//
+
+- REDUX TOOLKIT!!!!! (STOWRZYC THUNKA, STRUKTURA PLIKOW!) (struktura redux => features \ thunks) (stworzenie listy w thunku, tablice utworzyc ze studentami, ze statusem studentow /  theme provider) - ZROBIONE
+- scroll przy edyciji mobilnej / widok mobilny ogarnac - ZROBIONE
+- typy - ZROBIONE
+- w react hook form nie trzeba pobierac SelectedStudent, wszystko pobierze form (uzyc w onSubmit data zeby nie pobierac danych z gory) - ZROBIONE
+- setTimeout do wywalnia z loadera - ZROBIONE
+- na tabeli dodac nawgacje do edycji na studencie - ZROBIONE
+- dropdown wieksze paddingi, marginesy powiekszyc na desktopowym ( margin top na dekstop i margin bottom mobile) - ZROBIONE
+- dropdown select custom - ZROBIONE
+- placeholdery input dodac - ZROBIONE
+- walidacja nie wchodzi Ł imię i nazwisko - ZROBIONE
+- walidacja przy edycji poprawic - ZROBIONE
+- focus inputy mobilnie na pomaranczowo - ZROBIONE (U MNIE SA CZARNE TYLKO / ZMIENIONY outline)
+- overflow auto dodac na student page - ZROBIONE
+- styled component folder z plikiem + plik styles - ZROBIONE
+- tabela wyjac jeszcze dalej zeby bylo reuzywalne - ZROBIONE
+- @media queries - plik constant / inne wartości stałem - ZROBIONE (media + regex)
+- drugi plik media queries- ZROBIONE
+- sidebar = link -> navlink (nie trzeba funkcji isActive) - ZROBIONE
+- className powywalac i zamienic na styled components - ZROBIONE
+- react hook form - input component (2 inputy - 1 dla dropdownu i 1 dla wpisywanego tekstu) - ZROBIONE
+- wywalić onChange bo react hook form wykonuje to sam - ZROBIONE
+- osobny plik z routami / zarzadanie routesami - ZROBIONE
+- add/edycja przy kliknieciu F5 zeby nie wychodzilo do tabeli tylko zostalo na ekranie edycji - ZROBIONE
+- EDIT page (w adresie /id ucznia) - ZROBIONE
+- isEdit - obydwa wywalic z edit (wszystko przenosić routem do AddEditPage / useNavigate - ZROBIONE
+- useState dropdown paginacja zmiana - ZROBIONE
+
+
+//========== ZROBIONE ==========//
+
+- Podczas dodawania / edycji ucznia pole nazwisko nie powinno obsługiwać cyfr. Pokazać error, że takie cyfry są nieobsługiwane - ZROBIONE
+- Problem z wyszukiwaniem. W momencie, kiedy próbuję wyszukać "Adama Nowaka", na 2 stronie to nie jestem w stanie ze wględu na to, że nasz student znajduje się na 1 stronie. Problem ten nie powinien występować w momencie, którym pobieramy wszystkich studentów jacy są w ogóle dostępni. - ZROBIONE
+- Selector w liście uczniów jest zbyt duży - ZROBIONE
+- Na dużym ekranie, selector w liście uczniów rozwija nam się do dołu przez co włącza nam się scroll na stronie i, żeby wybrać opcję musimy zescrollować stronę do dołu - ZROBIONE
+- W pliku AddEditStudent zastosowanie handleSubmit wraz z funckją w przycisku zamiast do znacznika "form", gdzie tam występuje również handle submit, ale jest on pusty - ZROBIONE
+- Zamiast tworenia akcji setIsEdit do rozpoznawania, czy mamy znaleźć się w panelu edycji/dodawania wystarczyło dodać w pliku routes.tsx do komponentu AddEditStudent parametr isEdit - ZROBIONE
+- Zastosowanie starej koncepcji wyciągania stanu z redux. Dlaczego nie po prostu hook useSelector ? - ZROBIONE
+- Brak wyniesionego fetchStudents do thunka - ZROBIONE
+- W momencie stworzenia thunka powinineś go zimportować do pliku ze slice oraz zastosować dostępne akcje z thunka "pending", "fulfilled", "rejected", dzięki czemu uniknąłbyć problemu z tworzeniem state dla loadera i martwieniu się, w które miejsce to wstawić, aby poprawnie uzyskać stan loaderu - ZROBIONE
+- W momencie zwężenia ekranu paginacja styka się z selectorem, brakuje chociaż minimalnego odstępu - ZROBIONE
+- Paginacja na dużym ekranie jest zbyt wysoko - ZROBIONE
+- W momencie wyszukania studenta paginacja powinna pozostać stabilna na dole strony - ZROBIONE
+- Brakuję typów do niektórych funckji, zmiennych przez co rzuca błędami w kodzie - ZROBIONE
+- Podczas rozszerzenia sidebar na dużym ekranie dziwnie przycina. Dobrze to widać kiedy otwieramy / zamykamy sidebar w sekcji uczniowie - ZROBIONE

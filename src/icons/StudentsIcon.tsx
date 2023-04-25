@@ -1,4 +1,6 @@
-const StudentsIcon = ({ stroke }: any) => {
+import { StudentsIconProps } from '../theme/types'
+
+const StudentsIcon = ({ stroke }: StudentsIconProps) => {
 	return (
 		<svg width="28" height="21" viewBox="0 0 28 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path

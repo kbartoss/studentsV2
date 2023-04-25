@@ -4,12 +4,12 @@ import { IconBoxProps } from '../../theme/types'
 import { StyledIconBox } from './IconBox.styles'
 
 const IconBox = ({ editStudent, deleteStudent, rowData }: IconBoxProps) => {
-	const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const handleDelete = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
 		e.stopPropagation()
 		deleteStudent(rowData)
 	}
 
-	const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const handleEdit = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
 		e.stopPropagation()
 		editStudent(rowData)
 	}

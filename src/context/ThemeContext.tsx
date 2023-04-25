@@ -1,20 +1,21 @@
 import { createContext, useState } from 'react'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import theme from '../theme/theme'
+import { Theme, ThemeProviderProps } from '../theme/types'
 
-const defaultThemeContext = {
+const initialThemeContext: Theme = {
 	theme,
 	setTheme: () => {},
 }
 
-const ThemeContext = createContext(defaultThemeContext)
+const ThemeContext = createContext<Theme>(initialThemeContext)
 
-const ThemeProvider = ({ children }: any) => {
+const ThemeProvider = ({ children }: ThemeProviderProps) => {
 	const [currentTheme, setCurrentTheme] = useState<typeof theme>(theme)
 
-	const value = {
-		theme: currentTheme,
-		setTheme: setCurrentTheme,
+	const value: Theme = {
+		theme,
+		setTheme: () => {},
 	}
 
 	return (

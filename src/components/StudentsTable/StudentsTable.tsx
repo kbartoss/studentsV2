@@ -5,7 +5,7 @@ import Avatar from '../Avatar/Avatar'
 import Grade from '../Grade/Grade'
 import IconBox from '../IconBox/IconBox'
 import Table from '../Table/Table'
-import { StudentsTableProps } from '../../theme/types'
+import { StudentsTableProps, TableRow } from '../../theme/types'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 
@@ -16,7 +16,7 @@ const StudentsTable = ({ filteredStudentsData, editStudent, deleteStudent }: Stu
 			{
 				accessor: 'avatar',
 				width: '8%',
-				Cell: ({ row }: any) => {
+				Cell: ({ row }: { row: TableRow }) => {
 					const nameInitial = row.original.name[0].toUpperCase()
 					const surnameInitial = row.original.surname[0].toUpperCase()
 					return <Avatar initials={`${nameInitial}${surnameInitial}`} />
@@ -26,7 +26,7 @@ const StudentsTable = ({ filteredStudentsData, editStudent, deleteStudent }: Stu
 				Header: 'Imię',
 				accessor: 'name',
 				width: '15%',
-				Cell: ({ row }: any) => {
+				Cell: ({ row }: { row: TableRow }) => {
 					const fullName = `${row.original.name} ${row.original.surname}`
 					return <p style={{ fontWeight: '500' }}>{fullName}</p>
 				},
@@ -40,7 +40,7 @@ const StudentsTable = ({ filteredStudentsData, editStudent, deleteStudent }: Stu
 				Header: 'Nr. telefonu',
 				accessor: 'phoneNumber',
 				width: '15%',
-				Cell: ({ value }: any) => {
+				Cell: ({ value }: { value: number }) => {
 					const phoneNumber = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 					return <p>+48 {phoneNumber}</p>
 				},
@@ -49,7 +49,7 @@ const StudentsTable = ({ filteredStudentsData, editStudent, deleteStudent }: Stu
 				Header: 'Data dod.',
 				accessor: 'created_at',
 				width: '12%',
-				Cell: ({ value }: any) => {
+				Cell: ({ value }: { value: string }) => {
 					return <p>{format(new Date(value), 'dd.MM.yyyy')}</p>
 				},
 			},
@@ -57,7 +57,7 @@ const StudentsTable = ({ filteredStudentsData, editStudent, deleteStudent }: Stu
 				Header: 'Ocena',
 				accessor: 'grade',
 				width: '10%',
-				Cell: ({ value }: any) => {
+				Cell: ({ value }: { value: number }) => {
 					return <Grade value={value} />
 				},
 			},
@@ -65,7 +65,7 @@ const StudentsTable = ({ filteredStudentsData, editStudent, deleteStudent }: Stu
 				Header: '',
 				accessor: 'actions',
 				width: '10%',
-				Cell: ({ row }) => {
+				Cell: ({ row }: { row: TableRow }) => {
 					return <IconBox editStudent={editStudent} deleteStudent={deleteStudent} rowData={row.original} />
 				},
 			},

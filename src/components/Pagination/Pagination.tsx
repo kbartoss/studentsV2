@@ -14,7 +14,7 @@ const Pagination = ({ studentsNumber }: PaginationProps) => {
 
 	const options = ['10', '20', '30', '40']
 
-	const handleOptionChange = (option: any) => {
+	const handleOptionChange = (option: number) => {
 		dispatch(setItemsPerPage(option))
 	}
 
@@ -51,11 +51,7 @@ const Pagination = ({ studentsNumber }: PaginationProps) => {
 					<Dropdown>
 						<p>Pokaż:</p>
 						<SelectContainer selectIsOpen={selectIsOpen}>
-							<Select
-								options={options}
-								initialOption={'10'}
-								onOptionChange={handleOptionChange}
-							/>
+							<Select options={options} initialOption={'10'} onOptionChange={handleOptionChange} />
 						</SelectContainer>
 						<p>
 							{studentsNumber} z {allStudentsNumber} uczniów

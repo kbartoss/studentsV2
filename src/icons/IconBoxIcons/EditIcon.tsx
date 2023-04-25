@@ -1,6 +1,7 @@
+import { EditIconProps } from '../../theme/types'
 import { StyledIconBoxIcon } from './IconBoxIcons.styles'
 
-function EditIcon({ editStudent }: any) {
+function EditIcon({ editStudent }: EditIconProps) {
 	return (
 		<StyledIconBoxIcon
 			xmlns="http://www.w3.org/2000/svg"

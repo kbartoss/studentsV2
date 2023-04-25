@@ -11,7 +11,9 @@ const Text = styled.p`
 	font-size: 16px;
 `
 
-const MyComponent = (props: any) => {
+type MyComponentProps = React.PropsWithChildren<{}>
+
+const MyComponent = (props: MyComponentProps) => {
 	return (
 		<Container>
 			<Text> {props.children}</Text>

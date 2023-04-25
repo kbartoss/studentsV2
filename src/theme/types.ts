@@ -29,9 +29,22 @@ export type IsOpenProps = {
 export type Option = number
 
 export type TableProps<Data extends object> = {
-	columns: []
+	columns: any[]
 	data: Data[]
 	onRowClick: (data: Data) => void
+	isOpen: boolean
+}
+
+export type TableRow = {
+	original: {
+		id: number
+		name: string
+		surname: string
+		mail: string
+		phoneNumber: number
+		created_at: string
+		grade: number
+	}
 }
 
 export type StudentsTableProps = {
@@ -94,4 +107,66 @@ export type GradeProps = {
 
 export type SidebarProps = {
 	isOpen: boolean
+}
+
+export type Theme = {
+	theme: {
+		avatarColors: string[]
+		grade: {
+			high: string
+			mid: string
+			low: string
+			border: string
+		}
+		color: {
+			primaryColor: string
+			secondaryColor: string
+			blackColor: string
+			whiteColor: string
+			sidebarActiveBg: string
+			tableRowBg: string
+			deleteButton: string
+			deleteButtonHover: string
+			cancelButtonHover: string
+			inputBorder: string
+			dropdownP: string
+			paginationSpan: string
+			optionsBorder: string
+			optionsMobileBackgroud: string
+			optionsMobileBorder: string
+			optionsMobileHover: string
+			errorText: string
+			confirmBtnBgHover: string
+			backBtnBgHover: string
+		}
+	}
+	setTheme: () => void
+}
+
+export type ThemeProviderProps = {
+	children: React.ReactNode
+}
+
+export type DropdownIconProps = {
+	selectIsOpen: boolean
+}
+
+export type EditIconProps = {
+	editStudent: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void
+}
+
+export type TrashIconProps = {
+	handleDelete: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void
+}
+
+export type StartIconProps = {
+	stroke: string
+}
+
+export type StudentsIconProps = {
+	stroke: string
+}
+
+export type AddEditStudentProps = {
+	isEdit: boolean
 }

@@ -1,6 +1,7 @@
+import { TrashIconProps } from '../../theme/types'
 import { StyledIconBoxIcon } from './IconBoxIcons.styles'
 
-function TrashIcon({ handleDelete }: any) {
+function TrashIcon({ handleDelete }: TrashIconProps) {
 	return (
 		<StyledIconBoxIcon
 			xmlns="http://www.w3.org/2000/svg"

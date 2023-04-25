@@ -8,7 +8,7 @@ function CustomRoutes() {
 		<Routes>
 			<Route path="/" element={<Start />} />
 			<Route path="/students" element={<Students />} />
-			<Route path="/students/add" element={<AddEditStudent />} />
+			<Route path="/students/add" element={<AddEditStudent isEdit={false} />} />
 			<Route path="/students/:studentId/*" element={<AddEditStudent isEdit />} />
 		</Routes>
 	)

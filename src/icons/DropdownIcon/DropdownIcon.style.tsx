@@ -1,11 +1,12 @@
 import styled from 'styled-components'
+import { DropdownIconProps } from '../../theme/types'
 
-const StyledDropdownIcon = styled.svg<{ selectIsOpen: boolean }>`
+const StyledDropdownIcon = styled.svg<DropdownIconProps>`
 	position: absolute;
 	right: 14px;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	transform: ${({ selectIsOpen }: any) => (selectIsOpen ? 'rotate(180deg)' : 'rotate(0)')};
+	transform: ${({ selectIsOpen }) => (selectIsOpen ? 'rotate(180deg)' : 'rotate(0)')};
 	transition: transform 0.2s;
 `
 

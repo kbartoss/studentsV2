@@ -14,10 +14,10 @@ import {
 import Input from '../../components/Input/Input'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { setStudentsData } from '../../redux/features/students/studentsSlice'
-import { Option } from '../../theme/types'
+import { AddEditStudentProps, Option } from '../../theme/types'
 import { InputTitle } from '../../components/Input/Input.styles'
 
-const AddEditStudent = ({ isEdit }: any) => {
+const AddEditStudent = ({ isEdit }: AddEditStudentProps) => {
 	const {
 		register,
 		handleSubmit,
