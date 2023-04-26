@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setSelectIsOpen } from '../../redux/features/students/studentsSlice'
 import { RootState } from '../../redux/store'
 
-const Select = forwardRef(({ onOptionChange = () => {}, initialOption, options, field }: SelectProps, ref) => {
+const Select = forwardRef(({ onOptionChange = () => {}, initialOption, options, onChange }: SelectProps, ref) => {
 	const selectRef: React.MutableRefObject<HTMLElement | null> = useRef(null)
 	const [selectedOption, setSelectedOption] = useState(initialOption)
 
@@ -29,7 +29,7 @@ const Select = forwardRef(({ onOptionChange = () => {}, initialOption, options, 
 	useClickOutside(selectRef, () => dispatch(setSelectIsOpen(false)))
 
 	return (
-		<StyledSelect onClick={toggleSelect} ref={mergeRefs([selectRef, ref])} {...field} selectIsOpen={selectIsOpen}>
+		<StyledSelect onClick={toggleSelect} onChange={onChange} ref={mergeRefs([selectRef, ref])} selectIsOpen={selectIsOpen}>
 			<DropdownIcon selectIsOpen={selectIsOpen} />
 			<div>
 				<span>{selectedOption}</span>

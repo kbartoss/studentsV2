@@ -1,13 +1,14 @@
-import { forwardRef } from 'react'
 import { InputTitle, StyledInput } from './Input.styles'
 import { InputProps } from '../../theme/types'
+import { ErrorText } from '../../pages/AddEditStudent/AddEditStudent.styles'
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({ name, title, placeholder, ...rest }, ref) => {
+const Input = ({ title, placeholder, error, onChange, value }: InputProps) => {
 	return (
 		<>
 			<InputTitle>{title}</InputTitle>
-			<StyledInput name={name} placeholder={placeholder} {...rest} ref={ref} />
+			<StyledInput placeholder={placeholder} onChange={onChange} value={value} />
+			{error && <ErrorText>{error}</ErrorText>}
 		</>
 	)
-})
+}
 export default Input

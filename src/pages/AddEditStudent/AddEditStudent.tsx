@@ -70,47 +70,86 @@ const AddEditStudent = ({ isEdit }: AddEditStudentProps) => {
 
 			<FormWrapper>
 				<form onSubmit={handleSubmit(handleAddEditStudent)}>
-					<Input
-						title="Imię"
-						placeholder="Podaj imię ucznia"
-						defaultValue={selectedStudent?.name}
-						{...register('name', { required: true, minLength: 3, maxLength: 30, pattern: validName })}
+					<Controller
+						control={control}
+						name="name"
+						defaultValue={selectedStudent?.name || ''}
+						rules={{ required: true, minLength: 3, maxLength: 30, pattern: validName }}
+						render={({ field: { onChange, value }, fieldState: { error } }) => (
+							<>
+								<Input
+									title="Imię"
+									placeholder="Podaj imię ucznia"
+									onChange={onChange}
+									value={value}
+									error={error ? 'Imię powinno mieć od 3 do 30 znaków i nie zawierać cyfr.' : null}
+								/>
+							</>
+						)}
 					/>
-					{errors.name && <ErrorText>Imię powinno mieć od 3 do 30 znaków i nie zawierać cyfr.</ErrorText>}
 
-					<Input
-						title="Nazwisko"
-						placeholder="Podaj nazwisko ucznia"
-						defaultValue={selectedStudent?.surname}
-						{...register('surname', { required: 'true', minLength: 3, maxLength: 30, pattern: validName })}
+					<Controller
+						control={control}
+						name="surname"
+						defaultValue={selectedStudent?.surname || ''}
+						rules={{ required: true, minLength: 3, maxLength: 30, pattern: validName }}
+						render={({ field: { onChange, value }, fieldState: { error } }) => (
+							<>
+								<Input
+									title="Nazwisko"
+									placeholder="Podaj nazwisko ucznia"
+									onChange={onChange}
+									value={value}
+									error={error ? 'Nazwisko powinno mieć od 3 do 30 znaków i nie zawierać cyfr.' : null}
+								/>
+							</>
+						)}
 					/>
-					{errors.surname && <ErrorText>Nazwisko powinno mieć od 3 do 30 znaków i nie zawierać cyfr.</ErrorText>}
 
-					<Input
-						title="Numer telefonu"
-						type="number"
-						placeholder="Podaj numer telefonu ucznia"
-						defaultValue={selectedStudent?.phoneNumber}
-						{...register('phoneNumber', { required: true, minLength: 1, maxLength: 9, pattern: validPhone })}
+					<Controller
+						control={control}
+						name="phoneNumber"
+						defaultValue={selectedStudent?.phoneNumber || ''}
+						rules={{ required: true, minLength: 1, maxLength: 9, pattern: validPhone }}
+						render={({ field: { onChange, value }, fieldState: { error } }) => (
+							<>
+								<Input
+									title="Numer telefonu"
+									placeholder="Podaj numer telefonu ucznia"
+									onChange={onChange}
+									value={value}
+									error={error ? 'Numer telefonu powinien mieć od 1 do 9 cyfr.' : null}
+								/>
+							</>
+						)}
 					/>
-					{errors.phoneNumber && <ErrorText>Numer telefonu powinien mieć od 1 do 9 cyfr</ErrorText>}
 
-					<Input
-						title="Adres e-mail"
-						placeholder="Podaj e-mail ucznia"
-						defaultValue={selectedStudent?.mail}
-						{...register('mail', { required: true, pattern: validMail })}
+					<Controller
+						control={control}
+						name="mail"
+						defaultValue={selectedStudent?.mail || ''}
+						rules={{ required: true, pattern: validMail }}
+						render={({ field: { onChange, value }, fieldState: { error } }) => (
+							<>
+								<Input
+									title="Adres e-mail"
+									placeholder="Podaj e-mail ucznia"
+									onChange={onChange}
+									value={value}
+									error={error ? 'Nieprawidłowy format adresu e-mail' : null}
+								/>
+							</>
+						)}
 					/>
-					{errors.mail && <ErrorText>Nieprawidłowy format adresu e-mail</ErrorText>}
 
 					<Controller
 						name="grade"
 						control={control}
-						render={({ field }) => (
+						render={({ field: { onChange } }) => (
 							<>
 								<InputTitle>Wybierz ocenę</InputTitle>
 								<Select
-									{...field}
+									onChange={onChange}
 									onOptionChange={handleOptionChange}
 									initialOption={isEdit ? selectedStudent?.grade : 1}
 									options={['1', '2', '3', '4', '5', '6']}
@@ -132,3 +171,42 @@ const AddEditStudent = ({ isEdit }: AddEditStudentProps) => {
 }
 
 export default AddEditStudent
+
+{
+	/* <Input
+						title="Imię"
+						placeholder="Podaj imię ucznia"
+						defaultValue={selectedStudent?.name}
+						{...register('name', { required: true, minLength: 3, maxLength: 30, pattern: validName })}
+					/>
+					{errors.name && <ErrorText>Imię powinno mieć od 3 do 30 znaków i nie zawierać cyfr.</ErrorText>}
+
+					<Input
+						title="Nazwisko"
+						placeholder="Podaj nazwisko ucznia"
+						defaultValue={selectedStudent?.surname}
+						{...register('surname', { required: 'true', minLength: 3, maxLength: 30, pattern: validName })}
+					/>
+					{errors.surname && <ErrorText>Nazwisko powinno mieć od 3 do 30 znaków i nie zawierać cyfr.</ErrorText>} */
+}
+
+{
+	/* <Input
+						title="Numer telefonu"
+						type="number"
+						placeholder="Podaj numer telefonu ucznia"
+						defaultValue={selectedStudent?.phoneNumber}
+						{...register('phoneNumber', { required: true, minLength: 1, maxLength: 9, pattern: validPhone })}
+					/>
+					{errors.phoneNumber && <ErrorText>Numer telefonu powinien mieć od 1 do 9 cyfr</ErrorText>} */
+}
+
+{
+	/* <Input
+						title="Adres e-mail"
+						placeholder="Podaj e-mail ucznia"
+						defaultValue={selectedStudent?.mail}
+						{...register('mail', { required: true, pattern: validMail })}
+					/>
+					{errors.mail && <ErrorText>Nieprawidłowy format adresu e-mail</ErrorText>} */
+}

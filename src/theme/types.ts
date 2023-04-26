@@ -62,7 +62,7 @@ export type SelectProps = {
 	onOptionChange?: (option: Option) => void
 	initialOption: string
 	options: string[]
-	field?: Record<string, unknown>
+	onChange: React.ChangeEventHandler<HTMLInputElement>
 }
 
 export type PaginationProps = {
@@ -78,11 +78,13 @@ export type NavbarProps = {
 }
 
 export type InputProps = {
-	name: string
 	title: string
 	placeholder: string
 	defaultValue?: string
 	type?: string
+	error?: string | null
+	value: string
+	onChange: React.ChangeEventHandler<HTMLInputElement>
 }
 
 export type IconBoxProps = {
