@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../../redux/store'
-import { StudentsHeaderProps } from '../../../../theme/types'
+import { StudentsHeaderProps } from './StudentsHeader.types'
 import SearchIcon from '../../../../icons/SearchIcon/SearchIcon'
 import { SearchBox, StyledHeader } from './StudentsHeader.styles'
 import strings from '../../../../constants/strings'

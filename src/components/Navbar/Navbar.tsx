@@ -1,6 +1,6 @@
 import { Squash as Hamburger } from 'hamburger-react'
 import { Nav, HamburgerDiv } from './Navbar.styles'
-import { NavbarProps } from '../../theme/types'
+import { NavbarProps } from './Navbar.types'
 
 const Navbar = ({ toggle }: NavbarProps) => {
 	return (

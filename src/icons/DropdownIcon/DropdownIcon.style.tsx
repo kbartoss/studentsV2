@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { DropdownIconProps } from '../../theme/types'
+import { DropdownIconProps } from './DropdownIcon.types'
 
 const StyledDropdownIcon = styled.svg<DropdownIconProps>`
 	position: absolute;

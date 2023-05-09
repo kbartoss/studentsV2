@@ -6,7 +6,7 @@ import { RootState } from '../../redux/store'
 import { Option, Options, StyledSelect } from './Select.styles'
 import DropdownIcon from '../../icons/DropdownIcon/DropdownIcon'
 import useClickOutside from '../../hooks/useClickOutside'
-import { SelectProps } from '../../theme/types'
+import { SelectProps } from './Select.types'
 import { setSelectIsOpen } from '../../redux/features/students/studentsSlice'
 
 const Select = forwardRef(({ onOptionChange = () => {}, initialOption, options, onChange }: SelectProps, ref) => {

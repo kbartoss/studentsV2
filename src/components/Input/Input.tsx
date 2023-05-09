@@ -1,5 +1,5 @@
 import { InputTitle, StyledInput } from './Input.styles'
-import { InputProps } from '../../theme/types'
+import { InputProps } from './Input.types'
 import { ErrorText } from '../../pages/AddEditStudent/AddEditStudent.styles'
 
 const Input = ({ title, placeholder, error, onChange, value }: InputProps) => {

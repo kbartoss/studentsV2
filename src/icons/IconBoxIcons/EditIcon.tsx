@@ -1,4 +1,4 @@
-import { EditIconProps } from '../../theme/types'
+import { EditIconProps } from "./IconBoxIcons.types"
 import { StyledIconBoxIcon } from './IconBoxIcons.styles'
 
 function EditIcon({ editStudent }: EditIconProps) {

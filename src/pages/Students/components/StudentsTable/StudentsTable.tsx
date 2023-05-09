@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { format } from 'date-fns'
 import { useSelector } from 'react-redux'
-import { StudentsTableProps, TableRow } from '../../../../theme/types'
+import { StudentsTableProps, TableRow } from './StudentsTable.types'
 import { RootState } from '../../../../redux/store'
 import { TableContainer } from './StudentsTable.styles'
 import Avatar from '../../../../components/Avatar/Avatar'

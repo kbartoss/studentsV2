@@ -1,4 +1,4 @@
-import { StartIconProps } from "../theme/types"
+import { StartIconProps } from "./Icons.types"
 
 export const StartIcon = ({ stroke }: StartIconProps) => {
 	return (

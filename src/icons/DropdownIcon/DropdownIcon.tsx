@@ -1,5 +1,5 @@
 import { StyledDropdownIcon } from './DropdownIcon.style'
-import { DropdownIconProps } from '../../theme/types'
+import { DropdownIconProps } from './DropdownIcon.types'
 
 function DropdownIcon({ selectIsOpen }: DropdownIconProps) {
 	return (

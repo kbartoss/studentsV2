@@ -2,8 +2,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { Dropdown, PaginationContainer, SelectContainer, SideButton, StyledPagination } from './Pagination.styles'
 import Select from '../Select/Select'
-import { PaginationProps, StateProps } from '../../theme/types'
+import { StateProps } from './Pagination.types'
 import { setCurrentPage, setItemsPerPage } from '../../redux/features/students/studentsSlice'
+import { PaginationProps } from './Pagination.types'
 
 const Pagination = ({ studentsNumber }: PaginationProps) => {
 	const isOpen = useSelector((state: RootState) => state.students.isOpen)

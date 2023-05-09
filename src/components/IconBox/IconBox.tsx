@@ -1,6 +1,6 @@
 import EditIcon from '../../icons/IconBoxIcons/EditIcon'
 import TrashIcon from '../../icons/IconBoxIcons/TrashIcon'
-import { IconBoxProps } from '../../theme/types'
+import { IconBoxProps } from './IconBox.types'
 import { StyledIconBox } from './IconBox.styles'
 
 const IconBox = ({ editStudent, deleteStudent, rowData }: IconBoxProps) => {

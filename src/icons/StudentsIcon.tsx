@@ -1,4 +1,4 @@
-import { StudentsIconProps } from '../theme/types'
+import { StudentsIconProps } from "./Icons.types"
 
 const StudentsIcon = ({ stroke }: StudentsIconProps) => {
 	return (

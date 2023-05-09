@@ -1,6 +1,6 @@
 import { useTable } from 'react-table'
 import { useSelector } from 'react-redux'
-import { TableProps } from '../../theme/types'
+import { TableProps } from './Table.types'
 import { RootState } from '../../redux/store'
 import { StyledTable } from '../../pages/Students/components/StudentsTable/StudentsTable.styles'
 

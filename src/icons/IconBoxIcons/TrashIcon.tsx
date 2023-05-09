@@ -1,4 +1,4 @@
-import { TrashIconProps } from '../../theme/types'
+import { TrashIconProps } from "./IconBoxIcons.types"
 import { StyledIconBoxIcon } from './IconBoxIcons.styles'
 
 function TrashIcon({ handleDelete }: TrashIconProps) {

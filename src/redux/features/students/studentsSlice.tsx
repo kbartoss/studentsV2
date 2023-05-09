@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchStudents } from '../../thunks/students.thunks'
-import { Student } from '../../../theme/types'
+import { Student } from '../../../pages/Students/Students.types'
 
 type StudentsState = {
 	studentsData: Student[]

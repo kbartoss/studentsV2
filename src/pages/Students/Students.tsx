@@ -20,7 +20,7 @@ import {
 	setSelectedStudent,
 	setSearchQuery,
 } from '../../redux/features/students/studentsSlice'
-import { Student } from '../../theme/types'
+import { Student } from './Students.types'
 import { fetchStudents } from '../../redux/thunks/students.thunks'
 import NoStudentsMessage from './components/NoStudentsMessage/NoStudentMessage'
 

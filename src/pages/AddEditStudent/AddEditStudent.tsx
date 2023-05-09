@@ -13,8 +13,8 @@ import {
 } from './AddEditStudent.styles'
 import Input from '../../components/Input/Input'
 import { setStudentsData } from '../../redux/features/students/studentsSlice'
-import { AddEditStudentProps, Option } from '../../theme/types'
 import { InputTitle } from '../../components/Input/Input.styles'
+import { AddEditStudentProps, Option } from './AddEditStudents.types'
 
 const AddEditStudent = ({ isEdit }: AddEditStudentProps) => {
 	const {

@@ -7,7 +7,7 @@ import {
 	DeleteModalStudentInfo,
 	StyledDeleteModal,
 } from './DeleteModal.styles'
-import { DeleteModalProps } from '../../theme/types'
+import { DeleteModalProps } from './DeleteModal.types'
 
 const DeleteModal = ({ cancelDelete, confirmDelete, selectedStudent }: DeleteModalProps) => {
 	return (
