@@ -1,13 +1,13 @@
 import { forwardRef } from 'react'
 import { useRef, useState } from 'react'
-import DropdownIcon from '../../icons/DropdownIcon/DropdownIcon'
-import { Option, Options, StyledSelect } from './Select.styles'
-import useClickOutside from '../../hooks/useClickOutside'
-import { mergeRefs } from 'react-merge-refs'
-import { SelectProps } from '../../theme/types'
 import { useSelector, useDispatch } from 'react-redux'
-import { setSelectIsOpen } from '../../redux/features/students/studentsSlice'
+import { mergeRefs } from 'react-merge-refs'
 import { RootState } from '../../redux/store'
+import { Option, Options, StyledSelect } from './Select.styles'
+import DropdownIcon from '../../icons/DropdownIcon/DropdownIcon'
+import useClickOutside from '../../hooks/useClickOutside'
+import { SelectProps } from '../../theme/types'
+import { setSelectIsOpen } from '../../redux/features/students/studentsSlice'
 
 const Select = forwardRef(({ onOptionChange = () => {}, initialOption, options, onChange }: SelectProps, ref) => {
 	const selectRef: React.MutableRefObject<HTMLElement | null> = useRef(null)

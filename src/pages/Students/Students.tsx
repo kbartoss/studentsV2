@@ -1,14 +1,17 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { MoonLoader } from 'react-spinners'
+import { AppDispatch, RootState } from '../../redux/store'
 import { StyledStudents } from './Students.styles'
-import StudentsHeader from '../../components/StudentsHeader/StudentsHeader'
-import StudentsTable from '../../components/StudentsTable/StudentsTable'
+import { supabase } from '../../api/supabaseClient'
+import theme from '../../theme/theme'
+import StudentsHeader from './components/StudentsHeader/StudentsHeader'
+import StudentsTable from './components/StudentsTable/StudentsTable'
 import Overlay from '../../components/Overlay/Overlay'
 import DeleteModal from '../../components/DeleteModal/DeleteModal'
 import Pagination from '../../components/Pagination/Pagination'
-import { supabase } from '../../api/supabaseClient'
 import { LoaderContainer } from '../../styles/LoaderContainer.styles'
-import { MoonLoader } from 'react-spinners'
-import theme from '../../theme/theme'
 import {
 	setStudentsData,
 	setAllStudentsNumber,
@@ -17,11 +20,9 @@ import {
 	setSelectedStudent,
 	setSearchQuery,
 } from '../../redux/features/students/studentsSlice'
-import { useNavigate } from 'react-router-dom'
 import { Student } from '../../theme/types'
-import { useSelector, useDispatch } from 'react-redux'
 import { fetchStudents } from '../../redux/thunks/students.thunks'
-import { AppDispatch, RootState } from '../../redux/store'
+import NoStudentsMessage from './components/NoStudentsMessage/NoStudentMessage'
 
 const Students = () => {
 	const navigate = useNavigate()
@@ -46,7 +47,7 @@ const Students = () => {
 		dispatch(setCurrentPage(1))
 	}, [itemsPerPage, searchQuery])
 
-	const filteredStudentsData = studentsData.filter(student => {
+	const filteredStudentsData = (studentsData ?? []).filter(student => {
 		const fullName = `${student.name} ${student.surname}`
 		const searchQueryArr = searchQuery.toLowerCase().split(' ')
 		const containsSearchQuery = searchQueryArr.every(query => {
@@ -101,32 +102,36 @@ const Students = () => {
 	}
 
 	return (
-		<>
-			<StyledStudents isOpen={isOpen}>
-				<StudentsHeader setSearchQuery={query => dispatch(setSearchQuery(query))} addStudent={addStudent} />
-				<LoaderContainer>
-					<MoonLoader
-						color={theme.color.primaryColor}
-						loading={loading}
-						size={150}
-						aria-label="Loading Spinner"
-						data-testid="loader"
-					/>
-				</LoaderContainer>
-				<StudentsTable
-					filteredStudentsData={displayedStudents}
-					deleteStudent={deleteStudent}
-					editStudent={editStudent}
+		<StyledStudents isOpen={isOpen}>
+			<StudentsHeader setSearchQuery={query => dispatch(setSearchQuery(query))} addStudent={addStudent} />
+			<LoaderContainer>
+				<MoonLoader
+					color={theme.color.primaryColor}
+					loading={loading}
+					size={150}
+					aria-label="Loading Spinner"
+					data-testid="loader"
 				/>
-				<Pagination studentsNumber={displayedStudents.length} />
-				{showDeleteModal && (
-					<>
-						<Overlay closeModal={closeModal}></Overlay>
-						<DeleteModal cancelDelete={cancelDelete} confirmDelete={confirmDelete} selectedStudent={selectedStudent} />
-					</>
-				)}
-			</StyledStudents>
-		</>
+			</LoaderContainer>
+			{filteredStudentsData.length === 0 ? (
+				<NoStudentsMessage />
+			) : (
+				<>
+					<StudentsTable
+						filteredStudentsData={displayedStudents}
+						deleteStudent={deleteStudent}
+						editStudent={editStudent}
+					/>
+					<Pagination studentsNumber={displayedStudents.length} />
+				</>
+			)}
+			{showDeleteModal && (
+				<>
+					<Overlay closeModal={closeModal}></Overlay>
+					<DeleteModal cancelDelete={cancelDelete} confirmDelete={confirmDelete} selectedStudent={selectedStudent} />
+				</>
+			)}
+		</StyledStudents>
 	)
 }
 export default Students

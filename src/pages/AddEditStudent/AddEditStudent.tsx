@@ -1,18 +1,17 @@
+import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Controller, useForm, FieldValues } from 'react-hook-form'
+import { supabase } from '../../api/supabaseClient'
 import Select from '../../components/Select/Select'
 import { validPhone, validMail, validName } from '../../constants/regex'
-import { supabase } from '../../api/supabaseClient'
-import { useState } from 'react'
 import {
 	AddEditPageBtns,
 	BackBtn,
 	ConfirmBtn,
-	ErrorText,
 	FormWrapper,
 	StyledAddEditStudent,
 } from './AddEditStudent.styles'
 import Input from '../../components/Input/Input'
-import { useLocation, useNavigate } from 'react-router-dom'
 import { setStudentsData } from '../../redux/features/students/studentsSlice'
 import { AddEditStudentProps, Option } from '../../theme/types'
 import { InputTitle } from '../../components/Input/Input.styles'
@@ -171,42 +170,3 @@ const AddEditStudent = ({ isEdit }: AddEditStudentProps) => {
 }
 
 export default AddEditStudent
-
-{
-	/* <Input
-						title="Imię"
-						placeholder="Podaj imię ucznia"
-						defaultValue={selectedStudent?.name}
-						{...register('name', { required: true, minLength: 3, maxLength: 30, pattern: validName })}
-					/>
-					{errors.name && <ErrorText>Imię powinno mieć od 3 do 30 znaków i nie zawierać cyfr.</ErrorText>}
-
-					<Input
-						title="Nazwisko"
-						placeholder="Podaj nazwisko ucznia"
-						defaultValue={selectedStudent?.surname}
-						{...register('surname', { required: 'true', minLength: 3, maxLength: 30, pattern: validName })}
-					/>
-					{errors.surname && <ErrorText>Nazwisko powinno mieć od 3 do 30 znaków i nie zawierać cyfr.</ErrorText>} */
-}
-
-{
-	/* <Input
-						title="Numer telefonu"
-						type="number"
-						placeholder="Podaj numer telefonu ucznia"
-						defaultValue={selectedStudent?.phoneNumber}
-						{...register('phoneNumber', { required: true, minLength: 1, maxLength: 9, pattern: validPhone })}
-					/>
-					{errors.phoneNumber && <ErrorText>Numer telefonu powinien mieć od 1 do 9 cyfr</ErrorText>} */
-}
-
-{
-	/* <Input
-						title="Adres e-mail"
-						placeholder="Podaj e-mail ucznia"
-						defaultValue={selectedStudent?.mail}
-						{...register('mail', { required: true, pattern: validMail })}
-					/>
-					{errors.mail && <ErrorText>Nieprawidłowy format adresu e-mail</ErrorText>} */
-}

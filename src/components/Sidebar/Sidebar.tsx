@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { StyledSidebar } from './Sidebar.styles'
 import StudentsIcon from '../../icons/StudentsIcon'
 import StartIcon from '../../icons/StartIcon'
-import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 
 const Sidebar = () => {

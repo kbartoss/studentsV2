@@ -1,6 +1,7 @@
+import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { StartText, StyledStart } from './Start.styles'
-import { useSelector } from 'react-redux'
+import strings from '../../constants/strings'
 
 const Start = () => {
 	const isOpen = useSelector((state: RootState) => state.students.isOpen)
@@ -8,7 +9,7 @@ const Start = () => {
 	return (
 		<StyledStart isOpen={isOpen}>
 			<img src="/src/images/start-img.png" alt="Animated image of person sitting next to desk and using laptop" />
-			<StartText>Witamy w panelu administratora.</StartText>
+			<StartText>{strings.startHeaderText}</StartText>
 		</StyledStart>
 	)
 }
